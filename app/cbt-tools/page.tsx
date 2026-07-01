@@ -48,7 +48,7 @@ export default function CBTToolsDashboard() {
     // Initial load
     useEffect(() => {
         setIsMounted(true);
-        const saved = localStorage.getItem('easymed_thought_records');
+        const saved = localStorage.getItem('ontimetherapy_thought_records');
         if (saved) {
             try {
                 setRecords(JSON.parse(saved));
@@ -82,7 +82,7 @@ export default function CBTToolsDashboard() {
         
         const updated = [newRecord, ...records];
         setRecords(updated);
-        localStorage.setItem('easymed_thought_records', JSON.stringify(updated));
+        localStorage.setItem('ontimetherapy_thought_records', JSON.stringify(updated));
         
         // Reset form fields
         setSituation('');
@@ -103,7 +103,7 @@ export default function CBTToolsDashboard() {
         if (confirm("Are you sure you want to permanently delete this thought record?")) {
             const updated = records.filter(r => r.id !== id);
             setRecords(updated);
-            localStorage.setItem('easymed_thought_records', JSON.stringify(updated));
+            localStorage.setItem('ontimetherapy_thought_records', JSON.stringify(updated));
         }
     };
 

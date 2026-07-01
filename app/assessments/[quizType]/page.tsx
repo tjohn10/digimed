@@ -214,7 +214,7 @@ export default function QuizPage({ params }: QuizPageProps) {
             <section className="view-section active">
                 <div className="glass-panel results-card">
                     <h2 className="section-title">{quiz.title} Results</h2>
-                    <p className="section-subtitle" style={{ marginBottom: '2rem' }}>EasyMed Clinical Assessment Summary</p>
+                    <p className="section-subtitle" style={{ marginBottom: '2rem' }}>Ontime Therapy Clinical Assessment Summary</p>
 
                     <div className="results-gauge-container">
                         <svg className="gauge-svg" viewBox="0 0 200 120">

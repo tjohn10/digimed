@@ -3,25 +3,25 @@ import { ArrowRight, Clock, Shield, DollarSign, BookOpen } from 'lucide-react';
 
 export default function Home() {
   return (
-    <>
+    <section className="view-section active" style={{ width: '100%' }}>
       {/* Hero Section */}
       <div className="hero">
         <div className="hero-content">
           <div className="hero-badge">
             <Shield size={16} />
-            Clinical Excellence & Accredited Care
+            Heal. Balance. Thrive.
           </div>
-          <h1>Your Journey to <span>Mental Wellness</span> Starts Here</h1>
+          <h1>Holistic Psychotherapy for <span>Kids, Couples & Families</span></h1>
           <p className="hero-desc">
-            Reclaim control of your mind with evidence-based Cognitive Behavioral Therapy (CBT). Connect with BABCP-accredited specialists, take clinical-grade self-assessments, and work with interactive, digital mental tools built to support your daily wellness.
+            Reclaim control of your mind with evidence-based Cognitive Behavioral Therapy (CBT) and psychotherapy. Connect with accredited specialists, take clinical-grade self-assessments, and work with interactive digital mental tools built to support your daily wellness.
           </p>
           <div className="hero-actions">
-            <Link href="/assessments" className="btn btn-primary">
-              Take Free Assessment
+            <Link href="/book" className="btn btn-primary">
+              Get Therapy
               <ArrowRight size={18} />
             </Link>
-            <Link href="/therapists" className="btn btn-secondary">
-              Find a CBT Therapist
+            <Link href="/services" className="btn btn-secondary">
+              Learn More
             </Link>
           </div>
         </div>
@@ -62,7 +62,7 @@ export default function Home() {
 
       {/* Core Pillars Section */}
       <div className="section-title-wrap">
-        <h2 className="section-title">Why Choose EasyMed CBT?</h2>
+        <h2 className="section-title">Why Choose Ontime Therapy?</h2>
         <p className="section-subtitle">
           We believe in transparent pricing, gold-standard clinical accreditation, and interactive tools that put your wellness back in your own hands.
         </p>
@@ -73,9 +73,9 @@ export default function Home() {
           <div className="pillar-icon">
             <Shield size={24} color="var(--secondary)" />
           </div>
-          <h3>BABCP Gold-Standard</h3>
+          <h3>Accredited Gold-Standard</h3>
           <p>
-            Unlike general counselor directories, every specialist in the EasyMed team holds full accreditation with the BABCP (British Association for Behavioural and Cognitive Psychotherapies), the highest UK standard for CBT.
+            Unlike general counselor directories, every specialist in the Ontime Therapy team holds full accreditation with professional bodies (like the BABCP), ensuring the highest standard for CBT and psychotherapy.
           </p>
         </div>
         <div className="glass-card pillar-card">
@@ -97,6 +97,6 @@ export default function Home() {
           </p>
         </div>
       </div>
-    </>
+    </section>
   );
 }

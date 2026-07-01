@@ -1,21 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --bg-dark: #070e17;
-    --bg-panel: rgba(13, 22, 33, 0.75);
-    --bg-panel-hover: rgba(18, 30, 46, 0.85);
-    --bg-card: rgba(22, 35, 53, 0.6);
-    --primary: #10b981;
-    --primary-hover: #059669;
-    --primary-glow: rgba(16, 185, 129, 0.25);
-    --secondary: #06b6d4;
-    --secondary-hover: #0891b2;
+    --bg-dark: #061224; /* Deep Navy Dark background */
+    --bg-panel: rgba(15, 30, 54, 0.75);
+    --bg-panel-hover: rgba(22, 43, 77, 0.85);
+    --bg-card: rgba(26, 50, 89, 0.6);
+    --primary: #ff7824; /* Orange accent */
+    --primary-hover: #e05600;
+    --primary-glow: rgba(255, 120, 36, 0.25);
+    --secondary: #3b82f6; /* Secondary blue */
+    --secondary-hover: #2563eb;
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
-    --text-inverse: #070e17;
+    --text-inverse: #061224;
     --border: rgba(255, 255, 255, 0.07);
     --border-hover: rgba(255, 255, 255, 0.15);
-    --border-focus: rgba(16, 185, 129, 0.5);
+    --border-focus: rgba(255, 120, 36, 0.5);
     --font-heading: 'Outfit', sans-serif;
     --font-body: 'Inter', sans-serif;
     
@@ -35,23 +35,28 @@
 }
 
 [data-theme="light"] {
-    --bg-dark: #f8fafc; /* Slate 50 */
-    --bg-panel: rgba(255, 255, 255, 0.8); /* White frost */
+    --bg-dark: #f0f7ff; /* Soft sky blue start background */
+    --bg-panel: rgba(255, 255, 255, 0.85); /* White glass panel */
     --bg-panel-hover: rgba(255, 255, 255, 0.95);
-    --bg-card: rgba(241, 245, 249, 0.7); /* Slate 100 with opacity */
-    --text-main: #0f172a; /* Slate 900 */
-    --text-muted: #475569; /* Slate 600 */
-    --text-inverse: #f8fafc;
-    --border: rgba(15, 23, 42, 0.08); /* Slate 900 with transparency */
-    --border-hover: rgba(15, 23, 42, 0.18);
-    --border-focus: rgba(16, 185, 129, 0.6);
+    --bg-card: rgba(255, 255, 255, 0.9); /* Solid white card */
+    --text-main: #0a2540; /* Navy blue brand color for text */
+    --text-muted: #4a5568; /* Charcoal for secondary text */
+    --text-inverse: #ffffff;
+    --primary: #ff7824; /* Vibrant orange brand accent */
+    --primary-hover: #e05600;
+    --primary-glow: rgba(255, 120, 36, 0.2);
+    --secondary: #0a2540; /* Navy blue brand accent */
+    --secondary-hover: #07192b;
+    --border: rgba(10, 37, 64, 0.08); /* Soft navy border */
+    --border-hover: rgba(10, 37, 64, 0.16);
+    --border-focus: rgba(255, 120, 36, 0.5);
 
     /* Distortion Tags */
-    --distortion-bg: rgba(202, 138, 4, 0.1); /* Darker gold background */
+    --distortion-bg: rgba(202, 138, 4, 0.1);
     --distortion-border: rgba(202, 138, 4, 0.25);
-    --distortion-text: #854d0e; /* Gold 900 */
+    --distortion-text: #854d0e;
 
-    --blob-opacity: 0.06;
+    --blob-opacity: 0.08;
 }
 
 * {
@@ -76,6 +81,10 @@ body {
     overflow-x: hidden;
     position: relative;
     line-height: 1.6;
+}
+
+[data-theme="light"] body {
+    background: linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%) no-repeat fixed;
 }
 
 /* Global Theme Transition */
@@ -270,6 +279,7 @@ main {
     padding: 2rem;
     position: relative;
     z-index: 1;
+    align-self: center;
 }
 
 .view-section {
@@ -1768,5 +1778,155 @@ footer {
     }
     .form-full {
         grid-column: span 1;
+    }
+}
+
+/* Page Transition Animations */
+.page-transition-fadeIn {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.page-transition-fadeOut {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1), transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Micro-Animations & Interactivity Upgrades */
+.btn-primary:hover {
+    transform: scale(1.02) translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 120, 36, 0.4);
+}
+.btn-secondary:hover {
+    transform: scale(1.02) translateY(-2px);
+}
+.glass-card:hover {
+    transform: translateY(-5px) scale(1.01);
+}
+.glass-panel:hover {
+    border-color: var(--primary-glow);
+}
+
+/* Active pulse glow animation for primary buttons */
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 0 0 rgba(255, 120, 36, 0.4); }
+    70% { box-shadow: 0 0 0 8px rgba(255, 120, 36, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 120, 36, 0); }
+}
+.btn-primary {
+    animation: pulseGlow 4s infinite;
+}
+
+/* Practice Layout Grid Classes for Responsiveness */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1.8fr;
+    gap: 3.5rem;
+    align-items: start;
+}
+.about-nhs-tracks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.approach-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+.approach-three-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+}
+.services-detail-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1.6fr;
+    gap: 3.5rem;
+    align-items: start;
+}
+.faq-main-grid {
+    display: grid;
+    grid-template-columns: 1.7fr 1.3fr;
+    gap: 3.5rem;
+    align-items: start;
+}
+.booking-row-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+/* Responsive Breakpoints and Overrides */
+@media (max-width: 900px) {
+    .about-grid,
+    .approach-intro-grid,
+    .services-detail-grid,
+    .faq-main-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2.5rem !important;
+    }
+    .footer-container {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 2rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .approach-three-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+    .about-nhs-tracks {
+        grid-template-columns: 1fr !important;
+    }
+    .nav-menu {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: var(--bg-card);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 2rem !important;
+        gap: 1.5rem !important;
+        transition: left 0.3s ease;
+        overflow-y: auto;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    }
+    .nav-menu.open {
+        left: 0;
+    }
+    .nav-dropdown {
+        position: static !important;
+        box-shadow: none !important;
+        background: rgba(255, 255, 255, 0.02) !important;
+        border: none !important;
+        padding-left: 1rem !important;
+        width: 100%;
+    }
+    .mobile-menu-btn {
+        display: block !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .booking-row-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+    }
+    .footer-container {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+    .footer-bottom {
+        flex-direction: column !important;
+        gap: 1rem !important;
+        text-align: center !important;
     }
 }
