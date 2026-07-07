@@ -28,17 +28,23 @@ export default function AboutPage() {
               width: '130px', 
               height: '130px', 
               borderRadius: '50%', 
-              background: 'linear-gradient(135deg, var(--primary), var(--secondary))', 
+              overflow: 'hidden',
+              border: '3px solid var(--primary)',
+              boxShadow: '0 8px 24px rgba(255, 120, 36, 0.25)',
               display: 'flex', 
               alignItems: 'center', 
               justifyContent: 'center',
-              boxShadow: '0 8px 24px rgba(255, 120, 36, 0.25)',
-              color: '#ffffff',
-              fontSize: '3rem',
-              fontWeight: 800,
-              fontFamily: 'var(--font-heading)'
+              position: 'relative'
             }}>
-              AN
+              <img 
+                src="/images/ano_nduna.png" 
+                alt="Anotida Macdonald Nduna" 
+                style={{ 
+                  width: '100%', 
+                  height: '100%', 
+                  objectFit: 'cover' 
+                }} 
+              />
             </div>
             
             <div>

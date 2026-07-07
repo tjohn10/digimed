@@ -1673,6 +1673,24 @@ footer {
     color: var(--primary);
 }
 
+.social-icon-link {
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="light"] .social-icon-link {
+    background: rgba(15, 23, 42, 0.02);
+}
+
+.social-icon-link:hover {
+    color: var(--primary);
+    background: var(--primary-glow);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
 .footer-bottom {
     max-width: 1280px;
     margin: 0 auto;

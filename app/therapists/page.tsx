@@ -69,7 +69,7 @@ const initialTherapists: Therapist[] = [
         formats: ["online"],
         location: "manchester",
         price: 85,
-        avatar: "/images/therapist_4.png",
+        avatar: "/images/marcus_vance.png",
         bio: "Focuses on career burnout, executive stress management, and complex PTSD. Employs brief, structured behavioral experiments."
     },
     {
@@ -80,7 +80,7 @@ const initialTherapists: Therapist[] = [
         formats: ["online", "inperson"],
         location: "birmingham",
         price: 85,
-        avatar: "/images/therapist_1.png",
+        avatar: "/images/sofia_al_jamil.png",
         bio: "Specializes in systemic Cognitive Behavioral Therapy and relationship dynamics. Guides couples and individuals through depression coping skills."
     }
 ];

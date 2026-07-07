@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import { Instagram, Facebook } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -23,6 +24,47 @@ export default function Footer() {
               <img src="/images/accph-member.jpg" alt="ACCPH Member Logo" style={{ height: '36px', objectFit: 'contain', display: 'block' }} />
             </div>
           </div>
+          <div style={{ marginTop: '0.5rem' }}>
+            <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.75rem', fontWeight: 700, letterSpacing: '0.5px', textTransform: 'uppercase' }}>Follow Us</p>
+            <div style={{ display: 'flex', gap: '0.75rem' }}>
+              <a 
+                href="https://www.instagram.com/ontimetherapyservice?igsh=MXMxMXViNXBtNGlrcQ==" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="social-icon-link"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '50%',
+                  textDecoration: 'none'
+                }}
+              >
+                <Instagram size={18} />
+              </a>
+              <a 
+                href="https://www.facebook.com/photo/?fbid=122100079833383447&set=a.122100079845383447" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="social-icon-link"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '50%',
+                  textDecoration: 'none'
+                }}
+              >
+                <Facebook size={18} />
+              </a>
+            </div>
+          </div>
         </div>
         
         {/* Quick Links */}
@@ -34,6 +76,10 @@ export default function Footer() {
             <li><Link href="/services" className="footer-link" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem' }}>Our Services</Link></li>
             <li><Link href="/approach" className="footer-link" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem' }}>Our Approach</Link></li>
             <li><Link href="/faq" className="footer-link" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem' }}>FAQ & Policies</Link></li>
+            <li><Link href="/useful-information" className="footer-link" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem' }}>Useful Info Hub</Link></li>
+            <li><Link href="/useful-information/self-guided" className="footer-link" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem' }}>Self Guided Support</Link></li>
+            <li><Link href="/useful-information/parental-support" className="footer-link" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem' }}>Parental Support</Link></li>
+            <li><Link href="/useful-information/crisis-advice" className="footer-link" style={{ color: '#ef4444', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 500 }}>Crisis Advice</Link></li>
           </ul>
         </div>
 

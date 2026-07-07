@@ -11,6 +11,7 @@ function NavbarContent() {
     const [isOpen, setIsOpen] = useState(false);
     const [theme, setTheme] = useState<'light' | 'dark'>('dark');
     const [learnMoreOpen, setLearnMoreOpen] = useState(false);
+    const [usefulInfoOpen, setUsefulInfoOpen] = useState(false);
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -84,6 +85,62 @@ function NavbarContent() {
                         <Link href="/faq" className={`nav-link ${pathname === '/faq' ? 'active' : ''}`} onClick={() => setIsOpen(false)}>
                             FAQ & Policies
                         </Link>
+                    </li>
+                    
+                    {/* Dropdown CTA "Useful Info" */}
+                    <li 
+                        className="nav-dropdown-wrapper" 
+                        style={{ position: 'relative' }}
+                        onMouseEnter={() => setUsefulInfoOpen(true)}
+                        onMouseLeave={() => setUsefulInfoOpen(false)}
+                    >
+                        <button 
+                            className="nav-link" 
+                            onClick={() => setUsefulInfoOpen(!usefulInfoOpen)}
+                            style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem', fontWeight: 500, fontSize: '0.95rem', width: '100%', textAlign: 'left' }}
+                        >
+                            Useful Info <ChevronDown size={14} style={{ transform: usefulInfoOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+                        </button>
+                        {usefulInfoOpen && (
+                            <ul 
+                                className="nav-dropdown" 
+                                style={{ 
+                                    position: 'absolute', 
+                                    top: '100%', 
+                                    left: '0', 
+                                    background: 'var(--bg-card)', 
+                                    border: '1px solid var(--border)', 
+                                    borderRadius: '12px', 
+                                    padding: '0.5rem 0', 
+                                    listStyle: 'none', 
+                                    minWidth: '200px', 
+                                    boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
+                                    zIndex: 10,
+                                    margin: 0
+                                }}
+                            >
+                                <li>
+                                    <Link href="/useful-information" className="nav-link dropdown-item" style={{ padding: '0.6rem 1.25rem', display: 'block', textDecoration: 'none', fontSize: '0.9rem' }} onClick={() => { setUsefulInfoOpen(false); setIsOpen(false); }}>
+                                        Useful Info Hub
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/useful-information/self-guided" className="nav-link dropdown-item" style={{ padding: '0.6rem 1.25rem', display: 'block', textDecoration: 'none', fontSize: '0.9rem' }} onClick={() => { setUsefulInfoOpen(false); setIsOpen(false); }}>
+                                        Self Guided Support
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/useful-information/parental-support" className="nav-link dropdown-item" style={{ padding: '0.6rem 1.25rem', display: 'block', textDecoration: 'none', fontSize: '0.9rem' }} onClick={() => { setUsefulInfoOpen(false); setIsOpen(false); }}>
+                                        Parental Support
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/useful-information/crisis-advice" className="nav-link dropdown-item" style={{ padding: '0.6rem 1.25rem', display: 'block', textDecoration: 'none', fontSize: '0.9rem', color: '#ef4444' }} onClick={() => { setUsefulInfoOpen(false); setIsOpen(false); }}>
+                                        Crisis Advice
+                                    </Link>
+                                </li>
+                            </ul>
+                        )}
                     </li>
                     
                     {/* Dropdown CTA "Learn More" */}
