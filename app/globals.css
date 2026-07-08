@@ -292,6 +292,14 @@ main {
     to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
 /* Hero Section */
 .hero {
     display: flex;

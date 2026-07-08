@@ -42,6 +42,46 @@ function BookForm() {
   // Form Submission States
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [leadId, setLeadId] = useState<string | null>(null);
+
+  // Dynamic calendar dates based on current date
+  const [currentDateInfo, setCurrentDateInfo] = useState<{
+    year: number;
+    monthIndex: number;
+    monthName: string;
+    days: number[];
+  }>({
+    year: 2026,
+    monthIndex: 6,
+    monthName: 'July',
+    days: []
+  });
+
+  useEffect(() => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const monthIndex = today.getMonth(); // 0-indexed
+    const monthName = today.toLocaleString('default', { month: 'long' });
+    const currentDay = today.getDate();
+
+    // Get last day of the current month
+    const lastDay = new Date(year, monthIndex + 1, 0).getDate();
+
+    // Create array of days from currentDay to lastDay
+    const days = [];
+    for (let d = currentDay; d <= lastDay; d++) {
+      days.push(d);
+    }
+
+    setCurrentDateInfo({
+      year,
+      monthIndex,
+      monthName,
+      days
+    });
+  }, []);
 
   // Sync service dropdown with query parameters
   useEffect(() => {
@@ -62,9 +102,6 @@ function BookForm() {
       }
     }
   }, [initialService]);
-
-  // Quick list of dates (July 2026 dates)
-  const daysInMonth = Array.from({ length: 14 }, (_, i) => i + 1); // July 1st to 14th
 
   const timeSlots = ["09:00 AM", "11:00 AM", "01:00 PM", "03:00 PM", "05:00 PM"];
 
@@ -102,12 +139,56 @@ function BookForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validateForm()) {
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    // Format preferredDate as YYYY-MM-DD
+    const formattedDate = `${currentDateInfo.year}-${String(currentDateInfo.monthIndex + 1).padStart(2, '0')}-${String(selectedDate).padStart(2, '0')}`;
+
+    try {
+      const payload = {
+        name: name.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
+        therapyType,
+        diagnosis,
+        diagnosisOther: diagnosis === 'Other' ? diagnosisOther.trim() : undefined,
+        method,
+        payment,
+        preferredDate: formattedDate,
+        preferredTime: selectedTime,
+        additionalInfo: additionalInfo.trim() || undefined,
+        consent
+      };
+
+      const response = await fetch('https://ott-therapist-crm.vercel.app/api/book', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit the intake form. Please try again.');
+      }
+
+      setLeadId(data.leadId);
       setIsSubmitted(true);
       // Scroll to top to see success state
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err: any) {
+      setSubmitError(err.message || 'An unexpected error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -134,6 +215,11 @@ function BookForm() {
             <p style={{ color: 'var(--text-main)', fontWeight: 600, fontSize: '1.1rem', margin: '0 0 1rem' }}>
               We aim to respond to every request within 48 hrs.
             </p>
+            {leadId && (
+              <div style={{ margin: '0.5rem 0 1.5rem', padding: '0.75rem 1.25rem', background: 'rgba(255, 255, 255, 0.03)', borderRadius: '8px', border: '1px solid var(--border)', fontSize: '0.9rem', color: 'var(--text-muted)', display: 'inline-block' }}>
+                Intake Reference ID: <strong style={{ color: 'var(--text-main)' }}>{leadId}</strong>
+              </div>
+            )}
             <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: 1.6, maxWidth: '520px', margin: '0 auto' }}>
               Thank you for trusting OTT Psychotherapy. A clinical practitioner will contact you at your preferred time on <strong>{phone}</strong> or email you at <strong>{email}</strong> to arrange your initial consultation details.
             </p>
@@ -167,6 +253,7 @@ function BookForm() {
                   id="form-name"
                   type="text" 
                   value={name} 
+                  disabled={isSubmitting}
                   onChange={(e) => { setName(e.target.value); if (errors.name) setErrors({...errors, name: undefined}); }}
                   placeholder="e.g. John Doe"
                   style={{ 
@@ -176,7 +263,8 @@ function BookForm() {
                     border: errors.name ? '1.5px solid #ef4444' : '1px solid var(--border)', 
                     background: 'var(--bg-panel)',
                     color: 'var(--text-main)',
-                    outline: 'none'
+                    outline: 'none',
+                    opacity: isSubmitting ? 0.7 : 1
                   }}
                 />
                 {errors.name && <span style={{ color: '#ef4444', fontSize: '0.8rem', display: 'block', marginTop: '0.25rem' }}>{errors.name}</span>}
@@ -190,6 +278,7 @@ function BookForm() {
                     id="form-email"
                     type="email" 
                     value={email} 
+                    disabled={isSubmitting}
                     onChange={(e) => { setEmail(e.target.value); if (errors.email) setErrors({...errors, email: undefined}); }}
                     placeholder="e.g. john@example.com"
                     style={{ 
@@ -199,7 +288,8 @@ function BookForm() {
                       border: errors.email ? '1.5px solid #ef4444' : '1px solid var(--border)', 
                       background: 'var(--bg-panel)',
                       color: 'var(--text-main)',
-                      outline: 'none'
+                      outline: 'none',
+                      opacity: isSubmitting ? 0.7 : 1
                     }}
                   />
                   {errors.email && <span style={{ color: '#ef4444', fontSize: '0.8rem', display: 'block', marginTop: '0.25rem' }}>{errors.email}</span>}
@@ -211,6 +301,7 @@ function BookForm() {
                     id="form-phone"
                     type="tel" 
                     value={phone} 
+                    disabled={isSubmitting}
                     onChange={(e) => { setPhone(e.target.value); if (errors.phone) setErrors({...errors, phone: undefined}); }}
                     placeholder="e.g. 07497 208249"
                     style={{ 
@@ -220,7 +311,8 @@ function BookForm() {
                       border: errors.phone ? '1.5px solid #ef4444' : '1px solid var(--border)', 
                       background: 'var(--bg-panel)',
                       color: 'var(--text-main)',
-                      outline: 'none'
+                      outline: 'none',
+                      opacity: isSubmitting ? 0.7 : 1
                     }}
                   />
                   {errors.phone && <span style={{ color: '#ef4444', fontSize: '0.8rem', display: 'block', marginTop: '0.25rem' }}>{errors.phone}</span>}
@@ -241,6 +333,7 @@ function BookForm() {
                 <select 
                   id="form-therapy"
                   value={therapyType}
+                  disabled={isSubmitting}
                   onChange={(e) => { setTherapyType(e.target.value); if (errors.therapyType) setErrors({...errors, therapyType: undefined}); }}
                   style={{
                     width: '100%',
@@ -250,7 +343,8 @@ function BookForm() {
                     background: 'var(--bg-panel)',
                     color: 'var(--text-main)',
                     outline: 'none',
-                    cursor: 'pointer'
+                    cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                    opacity: isSubmitting ? 0.7 : 1
                   }}
                 >
                   <option value="">-- Select Therapy Type --</option>
@@ -274,6 +368,7 @@ function BookForm() {
                 <select 
                   id="form-diagnosis"
                   value={diagnosis}
+                  disabled={isSubmitting}
                   onChange={(e) => { setDiagnosis(e.target.value); if (errors.diagnosis) setErrors({...errors, diagnosis: undefined}); }}
                   style={{
                     width: '100%',
@@ -283,7 +378,8 @@ function BookForm() {
                     background: 'var(--bg-panel)',
                     color: 'var(--text-main)',
                     outline: 'none',
-                    cursor: 'pointer'
+                    cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                    opacity: isSubmitting ? 0.7 : 1
                   }}
                 >
                   <option value="">-- Select Category --</option>
@@ -306,6 +402,7 @@ function BookForm() {
                   <textarea 
                     id="form-diagnosis-other"
                     value={diagnosisOther}
+                    disabled={isSubmitting}
                     onChange={(e) => { setDiagnosisOther(e.target.value); if (errors.diagnosisOther) setErrors({...errors, diagnosisOther: undefined}); }}
                     placeholder="Briefly explain your symptoms or diagnoses..."
                     rows={3}
@@ -317,7 +414,8 @@ function BookForm() {
                       background: 'var(--bg-panel)',
                       color: 'var(--text-main)',
                       outline: 'none',
-                      resize: 'vertical'
+                      resize: 'vertical',
+                      opacity: isSubmitting ? 0.7 : 1
                     }}
                   />
                   {errors.diagnosisOther && <span style={{ color: '#ef4444', fontSize: '0.8rem', display: 'block', marginTop: '0.25rem' }}>{errors.diagnosisOther}</span>}
@@ -335,22 +433,24 @@ function BookForm() {
               <div>
                 <span style={{ display: 'block', fontSize: '0.9rem', fontWeight: 600, marginBottom: '0.6rem' }}>Preferred Consultation Method *</span>
                 <div style={{ display: 'flex', gap: '1.5rem' }}>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.95rem' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: isSubmitting ? 'not-allowed' : 'pointer', fontSize: '0.95rem' }}>
                     <input 
                       type="radio" 
                       name="consultation-method" 
                       value="Online" 
+                      disabled={isSubmitting}
                       checked={method === 'Online'} 
                       onChange={() => { setMethod('Online'); if (errors.method) setErrors({...errors, method: undefined}); }} 
                       style={{ accentColor: 'var(--primary)', width: '16px', height: '16px' }}
                     />
                     Online Video
                   </label>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.95rem' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: isSubmitting ? 'not-allowed' : 'pointer', fontSize: '0.95rem' }}>
                     <input 
                       type="radio" 
                       name="consultation-method" 
                       value="In-Person" 
+                      disabled={isSubmitting}
                       checked={method === 'In-Person'} 
                       onChange={() => { setMethod('In-Person'); if (errors.method) setErrors({...errors, method: undefined}); }} 
                       style={{ accentColor: 'var(--primary)', width: '16px', height: '16px' }}
@@ -365,22 +465,24 @@ function BookForm() {
               <div>
                 <span style={{ display: 'block', fontSize: '0.9rem', fontWeight: 600, marginBottom: '0.6rem' }}>Session Funding Method *</span>
                 <div style={{ display: 'flex', gap: '1.5rem' }}>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.95rem' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: isSubmitting ? 'not-allowed' : 'pointer', fontSize: '0.95rem' }}>
                     <input 
                       type="radio" 
                       name="payment-funding" 
                       value="Self-funded" 
+                      disabled={isSubmitting}
                       checked={payment === 'Self-funded'} 
                       onChange={() => { setPayment('Self-funded'); if (errors.payment) setErrors({...errors, payment: undefined}); }} 
                       style={{ accentColor: 'var(--primary)', width: '16px', height: '16px' }}
                     />
                     Self-funded
                   </label>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.95rem' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: isSubmitting ? 'not-allowed' : 'pointer', fontSize: '0.95rem' }}>
                     <input 
                       type="radio" 
                       name="payment-funding" 
                       value="Government funded" 
+                      disabled={isSubmitting}
                       checked={payment === 'Government funded'} 
                       onChange={() => { setPayment('Government funded'); if (errors.payment) setErrors({...errors, payment: undefined}); }} 
                       style={{ accentColor: 'var(--primary)', width: '16px', height: '16px' }}
@@ -403,32 +505,42 @@ function BookForm() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               {/* Date grid selection */}
               <div>
-                <span style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Select a Date in July 2026: *</span>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '0.5rem' }}>
-                  {daysInMonth.map((day) => {
-                    const isSelected = selectedDate === day;
-                    return (
-                      <button 
-                        key={day}
-                        type="button"
-                        onClick={() => { setSelectedDate(day); if (errors.preferredDate) setErrors({...errors, preferredDate: undefined}); }}
-                        style={{
-                          padding: '0.6rem',
-                          borderRadius: '8px',
-                          border: isSelected ? '1.5px solid var(--primary)' : '1px solid var(--border)',
-                          background: isSelected ? 'var(--primary)' : 'var(--bg-panel)',
-                          color: isSelected ? '#ffffff' : 'var(--text-main)',
-                          cursor: 'pointer',
-                          fontWeight: isSelected ? 700 : 500,
-                          fontSize: '0.85rem',
-                          transition: 'all 0.15s'
-                        }}
-                      >
-                        {day}
-                      </button>
-                    );
-                  })}
-                </div>
+                <span style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>
+                  Select a Date in {currentDateInfo.monthName} {currentDateInfo.year}: *
+                </span>
+                {currentDateInfo.days.length === 0 ? (
+                  <div style={{ color: 'var(--text-muted)', fontSize: '0.9rem', padding: '1rem', textAlign: 'center' }}>
+                    Loading available dates...
+                  </div>
+                ) : (
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '0.5rem' }}>
+                    {currentDateInfo.days.map((day) => {
+                      const isSelected = selectedDate === day;
+                      return (
+                        <button 
+                          key={day}
+                          type="button"
+                          disabled={isSubmitting}
+                          onClick={() => { setSelectedDate(day); if (errors.preferredDate) setErrors({...errors, preferredDate: undefined}); }}
+                          style={{
+                            padding: '0.6rem',
+                            borderRadius: '8px',
+                            border: isSelected ? '1.5px solid var(--primary)' : '1px solid var(--border)',
+                            background: isSelected ? 'var(--primary)' : 'var(--bg-panel)',
+                            color: isSelected ? '#ffffff' : 'var(--text-main)',
+                            cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                            fontWeight: isSelected ? 700 : 500,
+                            fontSize: '0.85rem',
+                            transition: 'all 0.15s',
+                            opacity: isSubmitting ? 0.6 : 1
+                          }}
+                        >
+                          {day}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
                 {errors.preferredDate && <span style={{ color: '#ef4444', fontSize: '0.8rem', display: 'block', marginTop: '0.4rem' }}>{errors.preferredDate}</span>}
               </div>
 
@@ -442,6 +554,7 @@ function BookForm() {
                       <button 
                         key={slot}
                         type="button"
+                        disabled={isSubmitting}
                         onClick={() => { setSelectedTime(slot); if (errors.preferredTime) setErrors({...errors, preferredTime: undefined}); }}
                         style={{
                           padding: '0.5rem 1rem',
@@ -449,13 +562,14 @@ function BookForm() {
                           border: isSelected ? '1.5px solid var(--primary)' : '1px solid var(--border)',
                           background: isSelected ? 'var(--primary)' : 'var(--bg-panel)',
                           color: isSelected ? '#ffffff' : 'var(--text-main)',
-                          cursor: 'pointer',
+                          cursor: isSubmitting ? 'not-allowed' : 'pointer',
                           fontWeight: isSelected ? 700 : 500,
                           fontSize: '0.85rem',
                           transition: 'all 0.15s',
                           display: 'flex',
                           alignItems: 'center',
-                          gap: '0.35rem'
+                          gap: '0.35rem',
+                          opacity: isSubmitting ? 0.6 : 1
                         }}
                       >
                         <Clock size={12} />
@@ -480,6 +594,7 @@ function BookForm() {
                 <textarea 
                   id="form-info"
                   value={additionalInfo}
+                  disabled={isSubmitting}
                   onChange={(e) => setAdditionalInfo(e.target.value)}
                   placeholder="Specify any relevant symptoms, clinical histories, or scheduling requests..."
                   rows={4}
@@ -491,17 +606,19 @@ function BookForm() {
                     background: 'var(--bg-panel)',
                     color: 'var(--text-main)',
                     outline: 'none',
-                    resize: 'vertical'
+                    resize: 'vertical',
+                    opacity: isSubmitting ? 0.7 : 1
                   }}
                 />
               </div>
 
               {/* Consent check */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <label style={{ display: 'flex', gap: '0.75rem', cursor: 'pointer', fontSize: '0.85rem', alignItems: 'start', lineHeight: 1.5, color: 'var(--text-main)' }}>
+                <label style={{ display: 'flex', gap: '0.75rem', cursor: isSubmitting ? 'not-allowed' : 'pointer', fontSize: '0.85rem', alignItems: 'start', lineHeight: 1.5, color: 'var(--text-main)' }}>
                   <input 
                     type="checkbox" 
                     checked={consent}
+                    disabled={isSubmitting}
                     onChange={(e) => { setConsent(e.target.checked); if (errors.consent) setErrors({...errors, consent: undefined}); }}
                     style={{ accentColor: 'var(--primary)', width: '16px', height: '16px', marginTop: '0.15rem', flexShrink: 0 }}
                   />
@@ -514,7 +631,7 @@ function BookForm() {
             </div>
           </div>
 
-          {/* Error Warning Banner if global errors exist */}
+          {/* Error Warning Banners if global or submission errors exist */}
           {Object.keys(errors).length > 0 && (
             <div style={{ display: 'flex', gap: '0.5rem', background: 'rgba(239, 68, 68, 0.05)', border: '1px solid rgba(239, 68, 68, 0.2)', borderRadius: '8px', padding: '0.75rem 1rem', alignItems: 'center', color: '#ef4444' }}>
               <AlertCircle size={18} style={{ flexShrink: 0 }} />
@@ -522,13 +639,41 @@ function BookForm() {
             </div>
           )}
 
+          {submitError && (
+            <div style={{ display: 'flex', gap: '0.5rem', background: 'rgba(239, 68, 68, 0.05)', border: '1px solid rgba(239, 68, 68, 0.2)', borderRadius: '8px', padding: '0.75rem 1rem', alignItems: 'center', color: '#ef4444' }}>
+              <AlertCircle size={18} style={{ flexShrink: 0 }} />
+              <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>{submitError}</span>
+            </div>
+          )}
+
           {/* Submit Action */}
           <button 
             type="submit" 
             className="btn btn-primary"
-            style={{ padding: '0.9rem', width: '100%', fontSize: '1.05rem', fontWeight: 700, borderRadius: '10px' }}
+            disabled={isSubmitting}
+            style={{ 
+              padding: '0.9rem', 
+              width: '100%', 
+              fontSize: '1.05rem', 
+              fontWeight: 700, 
+              borderRadius: '10px',
+              opacity: isSubmitting ? 0.7 : 1,
+              cursor: isSubmitting ? 'not-allowed' : 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.5rem'
+            }}
           >
-            Submit Secure Intake Form
+            {isSubmitting ? (
+              <>
+                <svg className="animate-spin" style={{ width: '20px', height: '20px' }} viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" style={{ opacity: 0.25 }} />
+                  <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" style={{ opacity: 0.75 }} />
+                </svg>
+                Submitting Form...
+              </>
+            ) : "Submit Secure Intake Form"}
           </button>
 
         </form>
