@@ -11,7 +11,7 @@ export default function Home() {
             <Shield size={16} />
             Heal. Balance. Thrive.
           </div>
-          <h1>Holistic Psychotherapy for <span>Kids, Couples & Families</span></h1>
+          <h1>Holistic counseling and psychotherapy for <span>individuals, young persons, couples and family.</span></h1>
           <p className="hero-desc">
             Reclaim control of your mind with evidence-based Cognitive Behavioral Therapy (CBT) and psychotherapy. Connect with accredited specialists, take clinical-grade self-assessments, and work with interactive digital mental tools built to support your daily wellness.
           </p>
@@ -44,7 +44,7 @@ export default function Home() {
       <div className="stats-grid">
         <div className="glass-panel stat-card">
           <div className="stat-num">100%</div>
-          <div className="stat-label">BABCP Accredited Therapists</div>
+          <div className="stat-label">ACCPH Accredited Therapists</div>
         </div>
         <div className="glass-panel stat-card">
           <div className="stat-num">15k+</div>
@@ -75,7 +75,7 @@ export default function Home() {
           </div>
           <h3>Accredited Gold-Standard</h3>
           <p>
-            Unlike general counselor directories, every specialist in the Ontime Therapy team holds full accreditation with professional bodies (like the BABCP), ensuring the highest standard for CBT and psychotherapy.
+            Unlike general counselor directories, every specialist in the Ontime Therapy team holds full accreditation with professional bodies (like the ACCPH), ensuring the highest standard for CBT and psychotherapy.
           </p>
         </div>
         <div className="glass-card pillar-card">

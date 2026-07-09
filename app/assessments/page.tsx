@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Activity, ShieldAlert, AlertCircle } from 'lucide-react';
+import { Activity, ShieldAlert, AlertCircle, BookOpen } from 'lucide-react';
 
 export default function AssessmentsHub() {
   return (
@@ -32,6 +32,38 @@ export default function AssessmentsHub() {
             A 7-question clinical tool measuring generalized anxiety symptoms. Ideal for gauging worries, tension, and nervous behaviors over the past 2 weeks.
           </p>
           <button className="btn btn-primary" style={{ marginTop: 'auto' }}>Start GAD-7 Screener</button>
+        </Link>
+      </div>
+
+      {/* Policy Consent Documents section */}
+      <div className="section-title-wrap" style={{ marginTop: '4rem' }}>
+        <h2 className="section-title">Clinical Consent & Safeguarding Documents</h2>
+        <p className="section-subtitle">
+          Please review, complete, and print/save our client consent and data confidentiality agreements before your first scheduled clinical session.
+        </p>
+      </div>
+
+      <div className="assessment-selector-grid" style={{ marginBottom: '2rem' }}>
+        <Link href="/assessments/consent-form" className="glass-panel selection-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <div className="icon">
+            <Activity size={32} color="var(--secondary)" />
+          </div>
+          <h3>Client Consent Form</h3>
+          <p>
+            Consent to share routine clinical information with healthcare agencies and understanding of UK/Jersey safeguarding frameworks.
+          </p>
+          <button className="btn btn-secondary" style={{ marginTop: 'auto', color: 'var(--secondary)', borderColor: 'var(--secondary)' }}>Fill & Sign Consent Form</button>
+        </Link>
+
+        <Link href="/assessments/confidentiality-policy" className="glass-panel selection-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <div className="icon">
+            <BookOpen size={32} color="var(--secondary)" />
+          </div>
+          <h3>Confidentiality & Consent Policy</h3>
+          <p>
+            Combined policy overview detailing data protection rights, parent/carer involvement, and clinical confidentiality limits under UK & Jersey laws.
+          </p>
+          <button className="btn btn-secondary" style={{ marginTop: 'auto', color: 'var(--secondary)', borderColor: 'var(--secondary)' }}>Fill & Sign Policy Document</button>
         </Link>
       </div>
 

@@ -34,6 +34,7 @@ function BookForm() {
   const [payment, setPayment] = useState('');
   const [additionalInfo, setAdditionalInfo] = useState('');
   const [consent, setConsent] = useState(false);
+  const [sharingConsent, setSharingConsent] = useState('No');
 
   // Scheduling State
   const [selectedDate, setSelectedDate] = useState<number | null>(null);
@@ -103,7 +104,7 @@ function BookForm() {
     }
   }, [initialService]);
 
-  const timeSlots = ["09:00 AM", "11:00 AM", "01:00 PM", "03:00 PM", "05:00 PM"];
+  const timeSlots = ["10:00 AM", "12:00 PM", "02:00 PM", "04:00 PM", "06:00 PM"];
 
   // Client Side Validation
   const validateForm = (): boolean => {
@@ -152,6 +153,11 @@ function BookForm() {
     const formattedDate = `${currentDateInfo.year}-${String(currentDateInfo.monthIndex + 1).padStart(2, '0')}-${String(selectedDate).padStart(2, '0')}`;
 
     try {
+      const sharingConsentText = `Sharing Consent: ${sharingConsent}`;
+      const combinedInfo = additionalInfo.trim() 
+        ? `${sharingConsentText}\n\n${additionalInfo.trim()}` 
+        : sharingConsentText;
+
       const payload = {
         name: name.trim(),
         email: email.trim(),
@@ -163,8 +169,9 @@ function BookForm() {
         payment,
         preferredDate: formattedDate,
         preferredTime: selectedTime,
-        additionalInfo: additionalInfo.trim() || undefined,
-        consent
+        additionalInfo: combinedInfo,
+        consent,
+        sharingConsent
       };
 
       const response = await fetch('https://ott-therapist-crm.vercel.app/api/book', {
@@ -455,7 +462,7 @@ function BookForm() {
                       onChange={() => { setMethod('In-Person'); if (errors.method) setErrors({...errors, method: undefined}); }} 
                       style={{ accentColor: 'var(--primary)', width: '16px', height: '16px' }}
                     />
-                    In-Person (Staffordshire)
+                    In-Person (Jersey island / Staffordshire)
                   </label>
                 </div>
                 {errors.method && <span style={{ color: '#ef4444', fontSize: '0.8rem', display: 'block', marginTop: '0.4rem' }}>{errors.method}</span>}
@@ -588,6 +595,39 @@ function BookForm() {
             <h3 style={{ fontSize: '1.2rem', fontWeight: 700, borderBottom: '1px solid var(--border)', paddingBottom: '0.5rem', marginBottom: '1.25rem', fontFamily: 'var(--font-heading)' }}>5. Clinical Safeguards & Consent</h3>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              {/* Sharing Consent */}
+              <div>
+                <span style={{ display: 'block', fontSize: '0.9rem', fontWeight: 650, marginBottom: '0.6rem', color: 'var(--text-main)' }}>
+                  I consent to Ontime Therapy sharing relevant information with other professionals involved in my care. *
+                </span>
+                <div style={{ display: 'flex', gap: '1.5rem', marginBottom: '0.5rem' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: isSubmitting ? 'not-allowed' : 'pointer', fontSize: '0.95rem', color: 'var(--text-main)' }}>
+                    <input 
+                      type="radio" 
+                      name="sharing-consent" 
+                      value="Yes" 
+                      disabled={isSubmitting}
+                      checked={sharingConsent === 'Yes'} 
+                      onChange={() => setSharingConsent('Yes')} 
+                      style={{ accentColor: 'var(--primary)', width: '16px', height: '16px' }}
+                    />
+                    Yes
+                  </label>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: isSubmitting ? 'not-allowed' : 'pointer', fontSize: '0.95rem', color: 'var(--text-main)' }}>
+                    <input 
+                      type="radio" 
+                      name="sharing-consent" 
+                      value="No" 
+                      disabled={isSubmitting}
+                      checked={sharingConsent === 'No'} 
+                      onChange={() => setSharingConsent('No')} 
+                      style={{ accentColor: 'var(--primary)', width: '16px', height: '16px' }}
+                    />
+                    No
+                  </label>
+                </div>
+              </div>
+
               {/* Additional Information */}
               <div>
                 <label htmlFor="form-info" style={{ display: 'block', fontSize: '0.9rem', fontWeight: 600, marginBottom: '0.4rem' }}>Additional Context (Optional)</label>
@@ -623,7 +663,7 @@ function BookForm() {
                     style={{ accentColor: 'var(--primary)', width: '16px', height: '16px', marginTop: '0.15rem', flexShrink: 0 }}
                   />
                   <span>
-                    I confirm that the information on this form is correct and can be used to handle my enquiry by phone, text or email in accordance with the OTT privacy policy.
+                    I confirm that the information on this form is correct and can be used to handle my enquiry by phone, text or email in accordance with the DATA Management policy.
                   </span>
                 </label>
                 {errors.consent && <span style={{ color: '#ef4444', fontSize: '0.8rem', display: 'block' }}>{errors.consent}</span>}

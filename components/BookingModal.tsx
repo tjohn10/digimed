@@ -193,12 +193,11 @@ function BookingModalContent() {
                                 required
                             >
                                 <option value="">Select slot...</option>
-                                <option value="09:00 - 09:15">09:00 - 09:15</option>
-                                <option value="10:30 - 10:45">10:30 - 10:45</option>
+                                <option value="10:00 - 10:15">10:00 - 10:15</option>
                                 <option value="12:00 - 12:15">12:00 - 12:15</option>
-                                <option value="14:15 - 14:30">14:15 - 14:30</option>
+                                <option value="14:00 - 14:15">14:00 - 14:15</option>
                                 <option value="16:00 - 16:15">16:00 - 16:15</option>
-                                <option value="17:30 - 17:45">17:30 - 17:45</option>
+                                <option value="18:00 - 18:15">18:00 - 18:15</option>
                             </select>
                         </div>
                     </div>

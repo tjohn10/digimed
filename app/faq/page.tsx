@@ -12,7 +12,23 @@ interface FAQItem {
 const faqData: FAQItem[] = [
   {
     question: "What is Cognitive Behavioural Therapy (CBT)?",
-    answer: "Cognitive Behavioural Therapy (CBT) is an evidence-based psychotherapeutic framework focusing on how thoughts, beliefs, and behavioral actions influence emotional and physiological feelings. By recognizing and challenging cognitive distortions, CBT teaches practical coping strategies to manage anxiety, depression, and other emotional distress."
+    answer: (
+      <div>
+        <p style={{ marginBottom: '1.25rem' }}>
+          Cognitive Behavioural Therapy (CBT) is an evidence-based psychotherapeutic framework focusing on how thoughts, beliefs, and behavioral actions influence emotional and physiological feelings. By recognizing and challenging cognitive distortions, CBT teaches practical coping strategies to manage anxiety, depression, and other emotional distress.
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginTop: '1.5rem' }} className="faq-cbt-images">
+          <div style={{ background: 'var(--bg-panel)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border)', textAlign: 'center' }}>
+            <img src="/images/cbt-steps.jpg" alt="Steps in a CBT Session" style={{ width: '100%', borderRadius: '8px', marginBottom: '0.75rem', display: 'block' }} />
+            <strong style={{ fontSize: '0.85rem', color: 'var(--text-main)' }}>Steps in a CBT Session</strong>
+          </div>
+          <div style={{ background: 'var(--bg-panel)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border)', textAlign: 'center' }}>
+            <img src="/images/cbt-triangle.jpg" alt="CBT Changing Perceptions" style={{ width: '100%', borderRadius: '8px', marginBottom: '0.75rem', display: 'block' }} />
+            <strong style={{ fontSize: '0.85rem', color: 'var(--text-main)' }}>CBT Changing Perceptions</strong>
+          </div>
+        </div>
+      </div>
+    )
   },
   {
     question: "Who is my therapist and what are their qualifications?",
@@ -20,7 +36,7 @@ const faqData: FAQItem[] = [
   },
   {
     question: "Do you offer online or in-person sessions?",
-    answer: "Yes, both. In-person therapy is provided at our clinic offices in Staffordshire. Online sessions are conducted via secure, encrypted video consultations accessible to clients UK-wide. Clinical studies confirm that secure online CBT is equal in treatment efficacy to traditional face-to-face sessions."
+    answer: "Yes, both. In-person therapy is provided at our clinic offices in Jersey island and Staffordshire. Online sessions are conducted via secure, encrypted video consultations accessible to clients UK-wide. Clinical studies confirm that secure online CBT is equal in treatment efficacy to traditional face-to-face sessions."
   },
   {
     question: "What are your session fees and are there any admin costs?",
@@ -40,7 +56,7 @@ const faqData: FAQItem[] = [
   },
   {
     question: "How many sessions will I need to see results?",
-    answer: "Because CBT is goal-oriented and time-limited, treatment courses generally range between 6 to 20 weekly sessions, depending on the severity and complexity of symptoms. We perform symptom triages every few weeks to collaboratively review your progress."
+    answer: "Because CBT is goal-oriented and time-limited, treatment courses generally range between 8 to 21 weekly sessions, depending on the severity and complexity of symptoms. We perform symptom triages every few weeks to collaboratively review your progress."
   },
   {
     question: "Is my personal therapy information kept confidential?",
@@ -64,7 +80,7 @@ const faqData: FAQItem[] = [
   },
   {
     question: "What locations do you serve in the UK?",
-    answer: "We serve clients locally in Staffordshire for in-person appointments, and provide secure online video therapy consultations to children, adolescents, couples, families, and professionals across the entire United Kingdom."
+    answer: "We serve clients locally in Jersey island and Staffordshire for in-person appointments, and provide secure online video therapy consultations to children, adolescents, couples, families, and professionals across the entire United Kingdom."
   }
 ];
 

@@ -108,7 +108,7 @@ export default function Footer() {
           <ul className="footer-links" style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
             <li style={{ wordBreak: 'break-all' }}>
               <span style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '0.2rem', textTransform: 'uppercase' }}>Email</span>
-              <a href="mailto:ontimetherapy@co.uk" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>ontimetherapy@co.uk</a>
+              <a href="mailto:contact@ontimetherapy.com" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>contact@ontimetherapy.com</a>
             </li>
             <li>
               <span style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '0.2rem', textTransform: 'uppercase' }}>Phone</span>
@@ -116,7 +116,7 @@ export default function Footer() {
             </li>
             <li>
               <span style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '0.2rem', textTransform: 'uppercase' }}>Location</span>
-              <span style={{ color: 'var(--text-main)', fontWeight: 500 }}>Staffordshire / Online UK-wide</span>
+              <span style={{ color: 'var(--text-main)', fontWeight: 500 }}>Jersey island, Staffordshire, online uk</span>
             </li>
           </ul>
         </div>
