@@ -220,7 +220,7 @@ function BookForm() {
           <div>
             <h2 style={{ fontSize: '1.75rem', fontWeight: 800, margin: '0 0 0.5rem', fontFamily: 'var(--font-heading)' }}>Request Received Successfully</h2>
             <p style={{ color: 'var(--text-main)', fontWeight: 600, fontSize: '1.1rem', margin: '0 0 1rem' }}>
-              We aim to respond to every request within 48 hrs.
+              We aim to respond to every request within 24 hrs.
             </p>
             {leadId && (
               <div style={{ margin: '0.5rem 0 1.5rem', padding: '0.75rem 1.25rem', background: 'rgba(255, 255, 255, 0.03)', borderRadius: '8px', border: '1px solid var(--border)', fontSize: '0.9rem', color: 'var(--text-muted)', display: 'inline-block' }}>

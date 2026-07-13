@@ -108,7 +108,7 @@ export default function Footer() {
           <ul className="footer-links" style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
             <li style={{ wordBreak: 'break-all' }}>
               <span style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '0.2rem', textTransform: 'uppercase' }}>Email</span>
-              <a href="mailto:contact@ontimetherapy.com" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>contact@ontimetherapy.com</a>
+              <a href="mailto:info@ontimetherapy.com" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>info@ontimetherapy.com</a>
             </li>
             <li>
               <span style={{ display: 'block', fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '0.2rem', textTransform: 'uppercase' }}>Phone</span>

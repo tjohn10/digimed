@@ -5,7 +5,7 @@ export async function sendEmail(subject: string, html: string, text: string, rep
   const smtpPort = process.env.SMTP_PORT || '587';
   const smtpUser = process.env.SMTP_USER;
   const smtpPass = process.env.SMTP_PASS;
-  const smtpFrom = process.env.SMTP_FROM || 'bookings@ontimetherapy.com';
+  const smtpFrom = process.env.SMTP_FROM || 'contact@ontimetherapy.com';
 
   // Force 'from' to use authenticated user to pass strict SMTP provider checks
   const mailSender = smtpUser ? `Ontime Therapy Bookings <${smtpUser}>` : smtpFrom;

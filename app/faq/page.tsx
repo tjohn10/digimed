@@ -52,7 +52,7 @@ const faqData: FAQItem[] = [
   },
   {
     question: "How do I request an initial consultation?",
-    answer: "You can easily submit an appointment request by navigating to our booking form (/book) or clicking 'Get Therapy' in the header. We collect basic contact details, booking preferences, and clinical indicators, aiming to respond to every initial inquiry in under 48 hours."
+    answer: "You can easily submit an appointment request by navigating to our booking form (/book) or clicking 'Get Therapy' in the header. We collect basic contact details, booking preferences, and clinical indicators, aiming to respond to every initial inquiry in under 24 hours."
   },
   {
     question: "How many sessions will I need to see results?",

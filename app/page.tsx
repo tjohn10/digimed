@@ -32,7 +32,7 @@ export default function Home() {
               <Clock size={30} color="var(--primary)" />
             </div>
             <h3>Zero Waiting Lists</h3>
-            <p>Access specialized therapist sessions online or in-person with quick, direct matching in under 48 hours.</p>
+            <p>Access specialized therapist sessions online or in-person with quick, direct matching in under 24 hours.</p>
             <Link href="/?booking=general" className="btn btn-secondary" style={{ width: '100%', padding: '0.6rem' }}>
               Free Phone Consultation
             </Link>
@@ -51,7 +51,7 @@ export default function Home() {
           <div className="stat-label">Consultations Provided</div>
         </div>
         <div className="glass-panel stat-card">
-          <div className="stat-num">48h</div>
+          <div className="stat-num">24h</div>
           <div className="stat-label">Average Connection Time</div>
         </div>
         <div className="glass-panel stat-card">
