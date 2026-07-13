@@ -46,7 +46,7 @@ function NavbarContent() {
             <div className="nav-container">
                 <Link href="/" className="logo" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none' }}>
                     <div style={{ background: 'inherit', padding: '4px 10px', borderRadius: '8px', display: 'flex', alignItems: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.05)', border: '1px solid rgba(0,0,0,0.03)' }}>
-                        <img src="/images/logo.png" alt="Ontime Therapy Logo" style={{ height: '65px', objectFit: 'contain' }} />
+                        <img src="/images/logo1.png" alt="Ontime Therapy Logo" style={{ height: '65px', objectFit: 'contain' }} />
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <span style={{ fontSize: '1.2rem', fontWeight: 800, fontFamily: 'var(--font-heading)', color: 'var(--text-main)', lineHeight: 1.1 }}>OTT Ontime Therapy</span>
