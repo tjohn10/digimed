@@ -7,6 +7,13 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 
+interface SubSection {
+  title: string;
+  subtitle?: string;
+  items: string[];
+  footnote?: string;
+}
+
 interface Service {
   id: string;
   title: string;
@@ -15,6 +22,7 @@ interface Service {
   detailedDesc: string;
   symptomsTitle: string;
   symptoms: string[];
+  subSections?: SubSection[];
 }
 
 const servicesData: Service[] = [
@@ -42,13 +50,25 @@ const servicesData: Service[] = [
     title: "Child CBT",
     icon: <Baby size={24} />,
     shortDesc: "Age-appropriate, creative, and engaging CBT techniques focusing on early intervention.",
-    detailedDesc: "Child CBT is structured specifically for children, translating psychological principles into age-appropriate, playful, and creative activities. Sessions focus on emotional recognition and regulation, while closely involving parents or carers to ensure a supportive environment at home.",
-    symptomsTitle: "Key focus areas include:",
+    detailedDesc: "Child Cognitive Behavioural Therapy designed specifically for young people, using creative, and age‑appropriate methods to help them understand and manage their emotions. Sessions translate CBT principles into engaging activities that support emotional growth, resilience, and healthy behaviour patterns.\n\nParents and carers are actively involved to ensure progress continues at home, creating a consistent and supportive environment for the child.",
+    symptomsTitle: "Key Focus Areas",
     symptoms: [
-      "emotional regulation",
-      "school stress",
-      "behavioral challenges",
-      "parent/carer involvement"
+      "Emotional regulation — Helping children identify, express, and manage big feelings.",
+      "School stress/anxiety — Supporting worries around school, friendships, and academic pressure.",
+      "Behavioural challenges — Addressing patterns such as anger, avoidance, or anxiety‑driven behaviours.",
+      "Parent/carer involvement — Equipping adults with tools to reinforce therapeutic progress."
+    ],
+    subSections: [
+      {
+        title: "What Parents Can Expect",
+        items: [
+          "A warm, structured, child‑friendly therapeutic space",
+          "Creative CBT tools (stories, drawings, games, role‑play)",
+          "Clear goals and measurable progress",
+          "Regular parent/carer check‑ins",
+          "Practical strategies to use at home"
+        ]
+      }
     ]
   },
   {
@@ -98,15 +118,40 @@ const servicesData: Service[] = [
     title: "Eating Disorder Support",
     icon: <Apple size={24} />,
     shortDesc: "Specialist treatment informed by CBT-E for eating disorders and body image concerns.",
-    detailedDesc: "Specialist eating disorder psychotherapy is heavily informed by CBT-E (Enhanced Cognitive Behavioural Therapy), the premier evidence-based standard. We approach treatments with clinical sensitivity, clinical nutritional integration, behavioral normalization, and body image reconstruction.",
-    symptomsTitle: "Accredited clinical care for:",
+    detailedDesc: "Your eating disorder support is positioned as specialist, evidence‑based clinical care grounded in CBT‑E (Enhanced Cognitive Behavioural Therapy) — the leading international standard for psychological treatment of eating disorders.",
+    symptomsTitle: "Accredited Clinical Care For",
     symptoms: [
-      "Anorexia",
-      "Bulimia",
-      "ARFID",
-      "OSFED",
-      "binge eating",
-      "body image concerns"
+      "Anorexia — weight restoration, cognitive reframing, and compulsive behaviour reduction",
+      "Bulimia — binge‑purge cycle interruption and emotion‑regulation skill building",
+      "ARFID — sensory‑based, fear‑based, or low‑interest eating presentations",
+      "OSFED — tailored interventions for atypical or mixed‑presentation eating disorders",
+      "Binge Eating — appetite regulation, emotional eating reduction, and behavioural stabilisation",
+      "Body Image Concerns — perceptual, cognitive, and emotional interventions for appearance‑related distress"
+    ],
+    subSections: [
+      {
+        title: "Clinical Approach",
+        subtitle: "Treatment is delivered with clinical precision, nutritional integration, and behavioural rehabilitation, ensuring that each client receives a structured, compassionate, and outcome‑driven pathway to recovery.",
+        items: [
+          "CBT‑E Framework — A personalised, phased model targeting the cognitive, behavioural, and emotional mechanisms that maintain eating disorders.",
+          "Clinical Sensitivity & Safety — Sessions are paced to support medical stability, emotional regulation, and psychological readiness for change.",
+          "Integrated Clinical Nutrition — Evidence‑based nutritional guidance supports metabolic restoration, hunger‑satiety recalibration, and sustainable eating patterns.",
+          "Behavioural Normalisation — Gradual exposure, meal‑support strategies, and behavioural experiments help rebuild flexible, healthy eating behaviours.",
+          "Body Image Reconstruction — Cognitive restructuring, perceptual retraining, and self‑concept work reduce body‑checking, avoidance, and appearance‑related distress.",
+          "Relapse Prevention Planning — Clients leave treatment with a personalised maintenance plan, early‑warning indicators, and coping strategies."
+        ],
+        footnote: "Each treatment plan is tailored to the client’s developmental stage, medical profile, and psychological needs."
+      },
+      {
+        title: "What Clients Can Expect",
+        items: [
+          "A clear treatment roadmap with defined phases and measurable goals",
+          "Weekly or twice‑weekly sessions depending on clinical need",
+          "Optional collaboration with GPs, dietitians, or psychiatrists",
+          "A warm, non‑judgmental therapeutic environment that prioritises safety and dignity",
+          "Evidence‑based tools that empower clients to regain autonomy over food, body, and wellbeing"
+        ]
+      }
     ]
   },
   {
@@ -214,7 +259,7 @@ export default function ServicesPage() {
         </div>
 
         {/* Detailed Service Content Drawer (Right Side) */}
-        <div className="glass-panel" style={{ padding: '3rem 2.5rem', border: '1px solid var(--border)', background: 'var(--bg-card)', position: 'sticky', top: '100px' }}>
+        <div className="glass-panel responsive-panel" style={{ border: '1px solid var(--border)', background: 'var(--bg-card)', position: 'sticky', top: '100px' }}>
           
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--border)', paddingBottom: '1.5rem' }}>
             <div style={{ 
@@ -245,13 +290,40 @@ export default function ServicesPage() {
             </h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {selectedService.symptoms.map((symptom, idx) => (
-                <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: 'var(--text-muted)', fontSize: '0.95rem' }}>
-                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--primary)' }}></div>
+                <li key={idx} style={{ display: 'flex', alignItems: 'start', gap: '0.75rem', color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: 1.5 }}>
+                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--primary)', marginTop: '0.5rem', flexShrink: 0 }}></div>
                   <span style={{ fontWeight: 500 }}>{symptom}</span>
                 </li>
               ))}
             </ul>
           </div>
+
+          {selectedService.subSections?.map((sub, idx) => (
+            <div key={idx} style={{ background: 'rgba(6, 182, 212, 0.02)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.75rem', marginTop: '1.5rem' }}>
+              <h4 style={{ fontSize: '0.95rem', fontWeight: 700, margin: '0 0 1rem', textTransform: 'uppercase', color: 'var(--text-main)', letterSpacing: '0.5px', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <Sparkles size={16} color="var(--primary)" />
+                {sub.title}
+              </h4>
+              {sub.subtitle && (
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '1rem', fontStyle: 'italic' }}>
+                  {sub.subtitle}
+                </p>
+              )}
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                {sub.items.map((item, itemIdx) => (
+                  <li key={itemIdx} style={{ display: 'flex', alignItems: 'start', gap: '0.75rem', color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: 1.5 }}>
+                    <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--primary)', marginTop: '0.5rem', flexShrink: 0 }}></div>
+                    <span style={{ fontWeight: 500 }}>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              {sub.footnote && (
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginTop: '1rem', fontWeight: 500 }}>
+                  {sub.footnote}
+                </p>
+              )}
+            </div>
+          ))}
 
           <div style={{ marginTop: '2.5rem', display: 'flex', gap: '1.25rem' }}>
             <Link href={`/book?service=${selectedService.id}`} className="btn btn-primary" style={{ flex: 1, padding: '0.85rem' }}>

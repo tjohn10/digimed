@@ -17,7 +17,7 @@ const faqData: FAQItem[] = [
         <p style={{ marginBottom: '1.25rem' }}>
           Cognitive Behavioural Therapy (CBT) is an evidence-based psychotherapeutic framework focusing on how thoughts, beliefs, and behavioral actions influence emotional and physiological feelings. By recognizing and challenging cognitive distortions, CBT teaches practical coping strategies to manage anxiety, depression, and other emotional distress.
         </p>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginTop: '1.5rem' }} className="faq-cbt-images">
+        <div className="faq-cbt-images">
           <div style={{ background: 'var(--bg-panel)', padding: '1rem', borderRadius: '12px', border: '1px solid var(--border)', textAlign: 'center' }}>
             <img src="/images/cbt-steps.jpg" alt="Steps in a CBT Session" style={{ width: '100%', borderRadius: '8px', marginBottom: '0.75rem', display: 'block' }} />
             <strong style={{ fontSize: '0.85rem', color: 'var(--text-main)' }}>Steps in a CBT Session</strong>
@@ -32,7 +32,7 @@ const faqData: FAQItem[] = [
   },
   {
     question: "Who is my therapist and what are their qualifications?",
-    answer: "Your practitioner is Anotida Macdonald Nduna (Ano), a Senior Mental Health Practitioner and Specialist Eating Disorder Practitioner. Ano has over 18 years of frontline NHS clinical mental health experience spanning child and adolescent services (CAMHS), crisis teams, home treatment, A&E liaison, and primary care settings."
+    answer: "Your practitioner is Mr Anotida Macdonald (Ano), a Senior Mental Health Practitioner, Counsellor, Psychotherapist, and Advanced CBE & CBT‑E Personal Trainer with extensive experience across CAMHS, adult mental health, eating‑disorder pathways, and integrative therapeutic practice. He holds over 18 years of frontline NHS clinical experience, and is registered with the ACCPH, Nursing & Midwifery Council (NMC), and Jersey Care Commission."
   },
   {
     question: "Do you offer online or in-person sessions?",

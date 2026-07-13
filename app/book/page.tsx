@@ -174,7 +174,7 @@ function BookForm() {
         sharingConsent
       };
 
-      const response = await fetch('https://ott-therapist-crm.vercel.app/api/book', {
+      const response = await fetch('/api/book', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -213,7 +213,7 @@ function BookForm() {
 
       {isSubmitted ? (
         /* Success Confirmation Banner */
-        <div className="glass-panel" style={{ padding: '3.5rem 2.5rem', border: '2px solid var(--primary)', borderRadius: '16px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem', background: 'rgba(255, 120, 36, 0.03)', animation: 'fadeIn 0.4s ease' }}>
+        <div className="glass-panel responsive-panel" style={{ border: '2px solid var(--primary)', borderRadius: '16px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem', background: 'rgba(255, 120, 36, 0.03)', animation: 'fadeIn 0.4s ease' }}>
           <div style={{ padding: '1rem', background: 'rgba(255, 120, 36, 0.08)', borderRadius: '50%', color: 'var(--primary)', display: 'inline-flex' }}>
             <CheckCircle size={48} />
           </div>
@@ -238,7 +238,7 @@ function BookForm() {
         </div>
       ) : (
         /* Intake Form */
-        <form onSubmit={handleSubmit} className="glass-panel" style={{ padding: '3rem 2.5rem', border: '1px solid var(--border)', background: 'var(--bg-card)', display: 'flex', flexDirection: 'column', gap: '2rem' }} noValidate>
+        <form onSubmit={handleSubmit} className="glass-panel responsive-panel" style={{ border: '1px solid var(--border)', background: 'var(--bg-card)', display: 'flex', flexDirection: 'column', gap: '2rem' }} noValidate>
           
           {/* Privacy Disclaimer */}
           <div style={{ display: 'flex', gap: '0.85rem', background: 'rgba(6, 182, 212, 0.05)', border: '1px solid var(--border)', borderRadius: '10px', padding: '1rem', alignItems: 'center' }}>

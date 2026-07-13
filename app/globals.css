@@ -567,7 +567,7 @@ main {
 
 .assessment-selector-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     margin-bottom: 4rem;
 }
@@ -1954,5 +1954,51 @@ footer {
         flex-direction: column !important;
         gap: 1rem !important;
         text-align: center !important;
+    }
+}
+
+/* Responsive improvements */
+.faq-cbt-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.responsive-panel {
+    padding: 3.5rem 3rem;
+}
+
+@media (max-width: 768px) {
+    .faq-cbt-images {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+    .responsive-panel, .glass-panel, .glass-card {
+        padding: 2rem 1.5rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .responsive-panel, .glass-panel, .glass-card {
+        padding: 1.5rem 1rem !important;
+    }
+}
+
+.metadata-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 3rem;
+}
+
+.metadata-fields-grid > div {
+    min-width: 0;
+}
+
+@media (max-width: 768px) {
+    .metadata-card {
+        padding: 1.25rem 1rem !important;
     }
 }

@@ -11,9 +11,9 @@ export default function AboutPage() {
       {/* Introduction Header */}
       <div className="section-title-wrap" style={{ textAlign: 'center', marginBottom: '4rem' }}>
         <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--primary)', textTransform: 'uppercase', letterSpacing: '1.5px', display: 'block', marginBottom: '0.75rem' }}>Meet Your Practitioner</span>
-        <h1 className="section-title" style={{ fontSize: '2.75rem', fontWeight: 800, fontFamily: 'var(--font-heading)' }}>Anotida Macdonald Nduna (Ano)</h1>
+        <h1 className="section-title" style={{ fontSize: '2.75rem', fontWeight: 800, fontFamily: 'var(--font-heading)' }}>Mr Anotida Macdonald (Ano)</h1>
         <p className="section-subtitle" style={{ fontSize: '1.25rem', color: 'var(--text-muted)', marginTop: '0.5rem', fontWeight: 500 }}>
-          Senior Mental Health Practitioner & Specialist Eating Disorder Practitioner
+          CEO of Ontime Therapy Services & Senior Mental Health Practitioner
         </p>
       </div>
 
@@ -23,10 +23,10 @@ export default function AboutPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
           
           {/* Avatar Container with Glassmorphism */}
-          <div className="glass-panel" style={{ padding: '2.5rem 2rem', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem', border: '1px solid var(--border)' }}>
+          <div className="glass-panel responsive-panel" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem', border: '1px solid var(--border)' }}>
             <div style={{ 
-              width: '130px', 
-              height: '130px', 
+              width: '180px',
+              height: '180px',
               borderRadius: '50%', 
               overflow: 'hidden',
               border: '3px solid var(--primary)',
@@ -37,19 +37,19 @@ export default function AboutPage() {
               position: 'relative'
             }}>
               <img 
-                src="/images/ano_nduna.png" 
+                src="/images/therap.jpeg"
                 alt="Anotida Macdonald Nduna" 
                 style={{ 
-                  width: '100%', 
-                  height: '100%', 
-                  objectFit: 'cover' 
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover'
                 }} 
               />
             </div>
             
             <div>
-              <h3 style={{ fontSize: '1.35rem', fontWeight: 700, margin: '0 0 0.25rem' }}>Ano Nduna</h3>
-              <p style={{ color: 'var(--primary)', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px', margin: 0 }}>Registered Professional</p>
+              <h3 style={{ fontSize: '1.35rem', fontWeight: 700, margin: '0 0 0.25rem' }}>Mr Anotida Macdonald</h3>
+              <p style={{ color: 'var(--primary)', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px', margin: 0 }}>CEO & Registered Practitioner</p>
             </div>
 
             <div style={{ width: '100%', borderTop: '1px solid var(--border)', paddingTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', textAlign: 'left', fontSize: '0.85rem' }}>
@@ -74,13 +74,38 @@ export default function AboutPage() {
           </div>
 
           {/* Accreditations Panel */}
-          <div className="glass-panel" style={{ padding: '1.5rem', border: '1px solid var(--border)' }}>
-            <h4 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Accreditation & Registry</h4>
+          <div className="glass-panel" style={{ padding: '1.5rem', border: '1px solid var(--border)', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            <h4 style={{ fontSize: '1rem', fontWeight: 700, margin: 0, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Accreditation & Registry</h4>
+            
             <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
               <img src="/images/accph-member.jpg" alt="ACCPH Logo" style={{ height: '40px', objectFit: 'contain', background: '#fff', padding: '4px', borderRadius: '4px' }} />
               <div>
-                <span style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block' }}>ACCPH Accredited Member</span>
+                <span style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', color: 'var(--text-main)' }}>ACCPH Accredited Member</span>
                 <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Independent Practitioner Registry</span>
+              </div>
+            </div>
+
+            <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1rem' }}>
+              <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                <div style={{ width: '40px', height: '40px', borderRadius: '4px', background: 'rgba(255, 120, 36, 0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--primary)', fontWeight: 'bold', fontSize: '0.8rem', flexShrink: 0 }}>
+                  NMC
+                </div>
+                <div>
+                  <span style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', color: 'var(--text-main)' }}>Nursing & Midwifery Council</span>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Registered Member (NMC)</span>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1rem' }}>
+              <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                <div style={{ width: '40px', height: '40px', borderRadius: '4px', background: 'rgba(6, 182, 212, 0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--secondary)', fontWeight: 'bold', fontSize: '0.8rem', flexShrink: 0 }}>
+                  JCC
+                </div>
+                <div>
+                  <span style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', color: 'var(--text-main)' }}>Jersey Care Commission</span>
+                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Registered Practitioner</span>
+                </div>
               </div>
             </div>
           </div>
@@ -91,17 +116,41 @@ export default function AboutPage() {
           
           {/* Bio */}
           <div>
-            <h2 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '1.25rem', fontFamily: 'var(--font-heading)' }}>Clinical Experience & Background</h2>
+            <h2 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '1.25rem', fontFamily: 'var(--font-heading)' }}>About Mr Anotida Macdonald & Ontime Therapy Services</h2>
             <p style={{ color: 'var(--text-muted)', fontSize: '1rem', lineHeight: 1.7, marginBottom: '1rem' }}>
-              As a Senior Mental Health Practitioner with over <strong>18 years of frontline NHS mental health experience</strong>, I provide evidence-based, highly structured psychological treatments tailored to the unique complexities of every client. My practice is grounded in clinical excellence, compassionate containment, and robust safeguarding governance.
+              <strong>Ontime Therapy Services</strong> is led by <strong>Mr Anotida Macdonald</strong>, a Senior Mental Health Practitioner, Counsellor, Psychotherapist, and Advanced CBE & CBT‑E Personal Trainer with extensive experience across CAMHS, adult mental health, eating‑disorder pathways, and integrative therapeutic practice. His work is grounded in evidence‑based approaches and shaped by a deep commitment to helping people heal, find balance, and thrive.
             </p>
-            <p style={{ color: 'var(--text-muted)', fontSize: '1rem', lineHeight: 1.7 }}>
-              Over nearly two decades in NHS clinical teams, I have developed deep specializations in managing complex childhood and adolescent mental health distress, acute psychiatric crisis, and specialized eating disorders. I work collaboratively with individuals, couples, and families to foster lasting, sustainable healing.
+            <p style={{ color: 'var(--text-muted)', fontSize: '1rem', lineHeight: 1.7, marginBottom: '1rem' }}>
+              Anotida’s professional journey is strengthened by personal experiences that have shaped his empathy, resilience, and understanding of human suffering. He has lived through mass bereavement and the emotional complexities of divorce, experiences that taught him the weight of grief, the fragility of relationships, and the courage required to rebuild life after profound loss. These chapters of his life are not the centre of his story, but they inform the compassion, steadiness, and authenticity he brings to his clinical work. They allow him to sit with people in their darkest moments without judgement, and to support them with a depth of understanding that cannot be learned from textbooks alone.
+            </p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '1rem', lineHeight: 1.7, marginBottom: '1rem' }}>
+              At Ontime Therapy Services, clients find a space that is safe, confidential, and grounded in genuine human care. The service offers:
+            </p>
+            <div style={{ background: 'rgba(6, 182, 212, 0.03)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1.25rem 1.5rem', marginBottom: '1.5rem' }}>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                {[
+                  "Clinical assessment and therapeutic formulation",
+                  "Counselling and psychotherapy for children, young people, adults, and families",
+                  "Specialist CBT‑E support for eating disorders",
+                  "Trauma‑informed and integrative therapeutic interventions"
+                ].map((item, idx) => (
+                  <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: 'var(--text-muted)', fontSize: '0.95rem' }}>
+                    <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--primary)' }}></div>
+                    <span style={{ fontWeight: 500 }}>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <p style={{ color: 'var(--text-muted)', fontSize: '1rem', lineHeight: 1.7, marginBottom: '1rem' }}>
+              Anotida’s approach blends clinical skill with humility, faith‑centred values, and a belief in every person’s capacity to grow. His practice is relational, respectful, and built on the understanding that healing is not linear — it is a journey walked with patience, courage, and the right support.
+            </p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '1rem', lineHeight: 1.7, marginBottom: 0 }}>
+              Ontime Therapy Services stands as a place where people can explore their experiences safely, reconnect with their strengths, and move toward a future defined not by what they have endured, but by what they are becoming.
             </p>
           </div>
 
           {/* Clinical Tracks */}
-          <div className="glass-panel" style={{ padding: '2rem', border: '1px solid var(--border)' }}>
+          <div className="glass-panel responsive-panel" style={{ border: '1px solid var(--border)' }}>
             <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1.25rem', fontFamily: 'var(--font-heading)', color: 'var(--text-main)' }}>Frontline NHS Clinical Tracks</h3>
             <div className="about-nhs-tracks">
               {[

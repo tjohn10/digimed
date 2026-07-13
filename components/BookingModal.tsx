@@ -43,6 +43,8 @@ function BookingModalContent() {
         date: '',
         time: ''
     });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
 
     useEffect(() => {
         if (bookingVal) {
@@ -87,21 +89,50 @@ function BookingModalContent() {
         }));
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        
-        const dateObj = new Date(formData.date);
-        const options: Intl.DateTimeFormatOptions = { weekday: 'long', month: 'long', day: 'numeric' };
-        const formattedDate = dateObj.toLocaleDateString('en-GB', options);
+        setIsSubmitting(true);
+        setSubmitError(null);
 
-        const params = new URLSearchParams();
-        params.set('success', 'true');
-        params.set('therapist', therapistName);
-        params.set('date', formattedDate);
-        params.set('time', formData.time);
-        params.set('phone', formData.phone);
-        
-        router.push(`${pathname}?${params.toString()}`);
+        try {
+            const response = await fetch('/api/consultation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    firstName: formData.firstName,
+                    lastName: formData.lastName,
+                    email: formData.email,
+                    phone: formData.phone,
+                    date: formData.date,
+                    time: formData.time,
+                    therapistName: therapistName
+                }),
+            });
+
+            if (!response.ok) {
+                const data = await response.json().catch(() => ({}));
+                throw new Error(data.error || 'Failed to submit consultation request. Please try again.');
+            }
+
+            const dateObj = new Date(formData.date);
+            const options: Intl.DateTimeFormatOptions = { weekday: 'long', month: 'long', day: 'numeric' };
+            const formattedDate = dateObj.toLocaleDateString('en-GB', options);
+
+            const params = new URLSearchParams();
+            params.set('success', 'true');
+            params.set('therapist', therapistName);
+            params.set('date', formattedDate);
+            params.set('time', formData.time);
+            params.set('phone', formData.phone);
+            
+            router.push(`${pathname}?${params.toString()}`);
+        } catch (err: any) {
+            setSubmitError(err.message || 'An unexpected error occurred.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     if (!isOpen) return null;
@@ -202,9 +233,18 @@ function BookingModalContent() {
                         </div>
                     </div>
 
-                    <div className="form-actions">
-                        <button type="button" className="btn btn-secondary" onClick={handleClose}>Cancel</button>
-                        <button type="submit" className="btn btn-primary">Submit Booking</button>
+                    <div className="form-actions" style={{ flexDirection: 'column', gap: '1rem', alignItems: 'stretch' }}>
+                        {submitError && (
+                            <div style={{ color: '#ef4444', fontSize: '0.85rem', marginBottom: '0.5rem', textAlign: 'center' }}>
+                                {submitError}
+                            </div>
+                        )}
+                        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end' }}>
+                            <button type="button" className="btn btn-secondary" onClick={handleClose} disabled={isSubmitting}>Cancel</button>
+                            <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+                                {isSubmitting ? 'Submitting...' : 'Submit Booking'}
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>

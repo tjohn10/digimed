@@ -31,7 +31,7 @@ export default function ConfidentialityPolicy() {
         </button>
       </div>
 
-      <div className="glass-panel" style={{ padding: '3.5rem 3rem', border: '1px solid var(--border)', background: 'var(--bg-card)', borderRadius: '16px' }}>
+      <div className="glass-panel responsive-panel" style={{ border: '1px solid var(--border)', background: 'var(--bg-card)', borderRadius: '16px' }}>
         
         {/* Document Header */}
         <div style={{ textAlign: 'center', borderBottom: '2px solid var(--border)', paddingBottom: '2rem', marginBottom: '2.5rem' }}>

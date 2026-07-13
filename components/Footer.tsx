@@ -11,8 +11,8 @@ export default function Footer() {
         {/* Branding & Governing Body */}
         <div className="footer-brand" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <Link href="/" className="footer-logo" style={{ textDecoration: 'none', display: 'inline-flex' }}>
-            <div style={{ background: '#ffffff', padding: '4px 8px', borderRadius: '8px', display: 'flex', alignItems: 'center' }}>
-              <img src="/images/logo.jpg" alt="Ontime Therapy Logo" style={{ height: '32px', objectFit: 'contain' }} />
+            <div style={{ background: 'inherit', padding: '4px 8px', borderRadius: '8px', display: 'flex', alignItems: 'center' }}>
+              <img src="/images/logo.png" alt="Ontime Therapy Logo" style={{ height: '70px', objectFit: 'contain' }} />
             </div>
           </Link>
           <p className="footer-desc" style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.6, maxWidth: '300px', margin: 0 }}>

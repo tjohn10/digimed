@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Activity, ShieldAlert, AlertCircle, BookOpen } from 'lucide-react';
+import { Activity, ShieldAlert, AlertCircle, BookOpen, Clipboard } from 'lucide-react';
 
 export default function AssessmentsHub() {
   return (
@@ -32,6 +32,17 @@ export default function AssessmentsHub() {
             A 7-question clinical tool measuring generalized anxiety symptoms. Ideal for gauging worries, tension, and nervous behaviors over the past 2 weeks.
           </p>
           <button className="btn btn-primary" style={{ marginTop: 'auto' }}>Start GAD-7 Screener</button>
+        </Link>
+
+        <Link href="/assessments/rcads" className="glass-panel selection-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <div className="icon">
+            <Clipboard size={32} color="var(--primary)" />
+          </div>
+          <h3>RCADS Anxiety & Depression</h3>
+          <p>
+            Revised Children's Anxiety and Depression Scale. A 47-question clinical screening tool with youth and parent/carer versions.
+          </p>
+          <button className="btn btn-primary" style={{ marginTop: 'auto' }}>Start RCADS Screener</button>
         </Link>
       </div>
 
