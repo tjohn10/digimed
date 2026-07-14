@@ -82,9 +82,9 @@ export default function Home() {
           <div className="pillar-icon">
             <DollarSign size={24} color="var(--secondary)" />
           </div>
-          <h3>Transparent Ethical Fees</h3>
+          <h3>Session Pricing</h3>
           <p>
-            We work on a flat session rate (£85 per session). This fee goes directly to supporting our practitioners, meaning no hidden administrative percentages or referral markups.
+            Fees are adjusted based on session location and type. Instead of fixed pricing, we offer transparent, personalised quotes so you only pay for what you need.
           </p>
         </div>
         <div className="glass-card pillar-card">

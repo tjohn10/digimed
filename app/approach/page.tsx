@@ -40,7 +40,7 @@ export default function ApproachPage() {
             </div>
             <h4 style={{ fontSize: '1.15rem', fontWeight: 700, margin: 0 }}>The Interconnected Cycle</h4>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.6, margin: 0 }}>
-              A single event triggers a **thought** (&quot;I can't handle this&quot;), which dictates an **emotion** (panic), activates a **physical sensation** (chest tightness), and results in a **behavior** (avoidance). CBT gives you the tools to intervene and break this chain at any point.
+              A single event triggers a <strong>thought</strong> (&quot;I can't handle this&quot;), which dictates an <strong>emotion</strong>(panic), activates a <strong>physical sensation</strong> (chest tightness), and results in a <strong>behavior</strong> (avoidance). CBT gives you the tools to intervene and break this chain at any point.
             </p>
           </div>
         </div>

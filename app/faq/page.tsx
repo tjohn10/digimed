@@ -40,7 +40,19 @@ const faqData: FAQItem[] = [
   },
   {
     question: "What are your session fees and are there any admin costs?",
-    answer: "We work on a transparent, flat-fee structure of £85 per standard clinical session. There are zero registration fees, hidden administrative referral markups, or diagnostic report surcharges. Your fee goes directly to supporting clinical work and patient materials."
+    answer: (
+      <div>
+        <p style={{ marginBottom: '0.75rem' }}>
+          At OnTime Therapy, fees are adjusted based on where the session takes place (in‑clinic, home visit, school visit, online), as well as the type of therapy required. This flexible structure ensures fairness and accessibility across different regions.
+        </p>
+        <p style={{ marginBottom: '0.75rem' }}>
+          Instead of fixed pricing, we offer transparent, personalised quotes so you only pay for what you need.
+        </p>
+        <p>
+          For an accurate fee based on your location, please reach out to <a href="mailto:info@ontimetherapy.com" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>info@ontimetherapy.com</a> or <a href="mailto:contact@ontimetherapy.com" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>contact@ontimetherapy.com</a>.
+        </p>
+      </div>
+    )
   },
   {
     question: "How long is each standard therapy session?",
