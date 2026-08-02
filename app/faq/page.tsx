@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { HelpCircle, ChevronDown, AlertCircle, ShieldAlert, PhoneCall } from 'lucide-react';
+import { HelpCircle, ChevronDown, AlertCircle, ShieldAlert, PhoneCall, UserCircle, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 
 interface FAQItem {
@@ -43,13 +43,15 @@ const faqData: FAQItem[] = [
     answer: (
       <div>
         <p style={{ marginBottom: '0.75rem' }}>
-          At OnTime Therapy, fees are adjusted based on where the session takes place (in‑clinic, home visit, school visit, online), as well as the type of therapy required. This flexible structure ensures fairness and accessibility across different regions.
+          At OnTime Therapy, fees are adjusted based on where the session takes place (in‑clinic, home visit, school visit, online), as well as the type of therapy required.
         </p>
         <p style={{ marginBottom: '0.75rem' }}>
           Instead of fixed pricing, we offer transparent, personalised quotes so you only pay for what you need.
         </p>
         <p>
-          For an accurate fee based on your location, please reach out to <a href="mailto:info@ontimetherapy.com" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>info@ontimetherapy.com</a> or <a href="mailto:contact@ontimetherapy.com" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>contact@ontimetherapy.com</a>.
+          For an accurate fee based on your location, please reach out to{' '}
+          <a href="mailto:info@ontimetherapy.com" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>info@ontimetherapy.com</a>{' '}
+          or <a href="mailto:contact@ontimetherapy.com" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: 600 }}>contact@ontimetherapy.com</a>.
         </p>
       </div>
     )
@@ -96,11 +98,112 @@ const faqData: FAQItem[] = [
   }
 ];
 
+// ── Patient Portal FAQ ──────────────────────────────────────────────────────
+const portalFaqData: FAQItem[] = [
+  {
+    question: "What is the OTT Patient Portal?",
+    answer: (
+      <div>
+        <p style={{ marginBottom: '0.75rem' }}>
+          The OTT Patient Portal (powered by <strong>admin.ontimetherapy.com</strong>) is your personal, encrypted therapy workspace. Once you register, you gain access to:
+        </p>
+        <ul style={{ paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+          <li>Your upcoming and past appointment schedule</li>
+          <li>Clinical intake records and session notes</li>
+          <li>Secure direct messaging with your therapist</li>
+          <li>Progress tracking and homework assignments</li>
+        </ul>
+        <p style={{ marginTop: '0.75rem' }}>
+          Access it at{' '}
+          <a href="https://admin.ontimetherapy.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>
+            admin.ontimetherapy.com
+          </a>{' '}
+          or via the <Link href="/portal" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>Patient Portal page</Link> on this site.
+        </p>
+      </div>
+    )
+  },
+  {
+    question: "How do I create a patient account?",
+    answer: (
+      <div>
+        <p style={{ marginBottom: '0.75rem' }}>You need only three things:</p>
+        <ol style={{ paddingLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+          <li>Your <strong>full name</strong></li>
+          <li>A valid <strong>email address</strong></li>
+          <li>A <strong>password</strong> (minimum 8 characters)</li>
+        </ol>
+        <p style={{ marginTop: '0.75rem' }}>
+          Visit the <Link href="/portal" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>Patient Portal → Register tab</Link> or go directly to{' '}
+          <a href="https://admin.ontimetherapy.com/sign-up" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>
+            admin.ontimetherapy.com/sign-up
+          </a>.
+        </p>
+      </div>
+    )
+  },
+  {
+    question: "Is my portal account separate from my booking form submission?",
+    answer: "Yes. Submitting the clinical intake form (/book) and creating a patient portal account are two independent steps. Your intake form sends clinical information to the therapist, while your portal account gives you real-time, ongoing access to your care. Your therapist will link your intake records to your account after your initial consultation."
+  },
+  {
+    question: "What happens immediately after I sign up?",
+    answer: "Your account is created instantly and you are redirected to the patient portal dashboard at admin.ontimetherapy.com. Some sections (e.g. session notes, treatment records) may become fully populated only once your therapist activates your clinical profile after your intake appointment."
+  },
+  {
+    question: "I already submitted a booking form — do I still need to register on the portal?",
+    answer: "Yes. We recommend registering for the portal even if you have already submitted a booking. The portal is your ongoing care hub: track appointment status, receive reminders, communicate securely with your care team, and access clinical materials — all separate from the one-time intake form."
+  },
+  {
+    question: "Is the patient portal secure and GDPR compliant?",
+    answer: "Yes. The portal uses TLS encryption for all data in transit. Your clinical records, messages, and personal data are stored in compliance with UK GDPR. Your data is never sold or shared with marketing platforms. Only your treating therapist and authorised clinical staff have access to your records."
+  },
+  {
+    question: "Can I use the portal on my mobile phone?",
+    answer: "Yes. The portal at admin.ontimetherapy.com is a Progressive Web App (PWA) optimised for mobile. You can add it to your home screen for app-like access without needing an app store download."
+  },
+  {
+    question: "What if I forget my patient portal password?",
+    answer: (
+      <p>
+        Use the <strong>Forgot password?</strong> link on the{' '}
+        <a href="https://admin.ontimetherapy.com/forgot-password" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>
+          portal sign-in page
+        </a>. If you do not receive the reset email within 5 minutes, check your spam folder or contact{' '}
+        <a href="mailto:info@ontimetherapy.com" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>info@ontimetherapy.com</a>.
+      </p>
+    )
+  },
+  {
+    question: "Can I message my therapist through the portal?",
+    answer: "Yes. The portal includes a secure encrypted messaging feature for non-urgent communication between sessions. This system is not monitored 24/7 and is not suitable for emergencies. For urgent concerns, call your therapist directly or dial 999 in an emergency."
+  },
+  {
+    question: "Can I cancel or reschedule sessions through the portal?",
+    answer: "Yes. Active patients can view and manage upcoming sessions from the portal dashboard. Please remember that cancellations require at least 24-48 hours' notice to avoid the full session fee. Portal cancellations within this window are still subject to the standard cancellation policy."
+  },
+  {
+    question: "What if I have technical issues accessing the portal?",
+    answer: (
+      <p>
+        Contact our administrative team at{' '}
+        <a href="mailto:contact@ontimetherapy.com" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>contact@ontimetherapy.com</a>{' '}
+        with a brief description of the issue and the device/browser you are using. We aim to resolve all technical queries within 1 working day.
+      </p>
+    )
+  }
+];
+
 export default function FAQPage() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [portalActiveIndex, setPortalActiveIndex] = useState<number | null>(null);
 
   const toggleAccordion = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
+  };
+
+  const togglePortalAccordion = (index: number) => {
+    setPortalActiveIndex(portalActiveIndex === index ? null : index);
   };
 
   return (
@@ -162,6 +265,76 @@ export default function FAQPage() {
               );
             })}
           </div>
+
+          {/* ── Patient Portal FAQ Section ── */}
+          <div id="patient-portal" style={{ marginTop: '4rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+              <div style={{ background: 'rgba(255,120,36,0.1)', borderRadius: '10px', padding: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <UserCircle size={22} color="var(--primary)" />
+              </div>
+              <h2 style={{ fontSize: '1.6rem', fontWeight: 700, fontFamily: 'var(--font-heading)', color: 'var(--text-main)', margin: 0 }}>
+                Patient Portal Questions
+              </h2>
+            </div>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '1.75rem', lineHeight: 1.6 }}>
+              Everything you need to know about your secure therapy workspace at{' '}
+              <a href="https://admin.ontimetherapy.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>
+                admin.ontimetherapy.com
+              </a>.
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {portalFaqData.map((item, index) => {
+                const isOpen = portalActiveIndex === index;
+                return (
+                  <div
+                    key={index}
+                    className="glass-panel"
+                    style={{
+                      padding: '1.25rem 1.5rem',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease',
+                      borderLeft: isOpen ? '4px solid var(--secondary)' : '1px solid var(--border)',
+                      background: isOpen ? 'var(--bg-panel-hover)' : 'var(--bg-panel)'
+                    }}
+                    onClick={() => togglePortalAccordion(index)}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                        <UserCircle size={18} color={isOpen ? 'var(--secondary)' : 'var(--text-muted)'} style={{ flexShrink: 0 }} />
+                        <h3 style={{ fontSize: '1rem', fontWeight: 650, fontFamily: 'var(--font-heading)', color: 'var(--text-main)', margin: 0 }}>
+                          {item.question}
+                        </h3>
+                      </div>
+                      <ChevronDown size={16} color={isOpen ? 'var(--secondary)' : 'var(--text-muted)'} style={{ transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s', flexShrink: 0 }} />
+                    </div>
+
+                    {isOpen && (
+                      <div style={{
+                        marginTop: '1rem',
+                        paddingLeft: '1.85rem',
+                        color: 'var(--text-muted)',
+                        fontSize: '0.92rem',
+                        lineHeight: 1.6,
+                        animation: 'fadeIn 0.2s ease'
+                      }}>
+                        {item.answer}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Portal CTA */}
+            <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <Link href="/portal" className="btn btn-primary" style={{ padding: '0.75rem 1.75rem', fontSize: '0.9rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+                <UserCircle size={16} /> Open Patient Portal
+              </Link>
+              <a href="https://admin.ontimetherapy.com/sign-up" target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ padding: '0.75rem 1.75rem', fontSize: '0.9rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+                Create Account <ExternalLink size={14} />
+              </a>
+            </div>
+          </div>
         </div>
 
         {/* Policies Callout Panels (Right) */}
@@ -188,8 +361,22 @@ export default function FAQPage() {
               OTT Psychotherapy maintains robust compliance with statutory UK safeguarding protocols for child protection and vulnerable adults. 
             </p>
             <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: 1.5, margin: 0 }}>
-              If a minor or vulnerable adult is identified to be at risk of abuse, neglect, or harm, we have a legal duty to report concerns to local authorities or social services. Confidentiality parameters are overridden in these acute safety contexts.
+              If a minor or vulnerable adult is identified to be at risk of abuse, neglect, or harm, we have a legal duty to report concerns to local authorities or social services.
             </p>
+          </div>
+
+          {/* Patient Portal Callout */}
+          <div className="glass-panel" style={{ padding: '2rem', border: '1px solid var(--border)', borderLeft: '4px solid var(--primary)', background: 'var(--bg-card)' }}>
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', marginBottom: '1rem' }}>
+              <UserCircle size={22} color="var(--primary)" />
+              <h3 style={{ fontSize: '1.15rem', fontWeight: 700, margin: 0, fontFamily: 'var(--font-heading)' }}>Patient Portal</h3>
+            </div>
+            <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '1.25rem' }}>
+              Register for secure online access to your appointments, session records, and secure messaging.
+            </p>
+            <Link href="/portal" className="btn btn-primary" style={{ padding: '0.6rem 1.25rem', fontSize: '0.875rem', width: '100%', justifyContent: 'center', display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
+              <UserCircle size={15} /> Access Portal
+            </Link>
           </div>
 
           {/* Crisis Support Notice */}

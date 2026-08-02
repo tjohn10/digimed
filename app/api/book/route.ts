@@ -1,17 +1,21 @@
 import { NextResponse } from 'next/server';
 import { sendEmail } from '../mail';
 
+// Target CRM endpoint – override via CRM_BOOK_URL in .env.local if needed
+const CRM_BOOK_URL =
+  process.env.CRM_BOOK_URL || 'https://admin.ontimetherapy.com/api/book';
+
 export async function POST(request: Request) {
   try {
     const payload = await request.json();
 
-    // 1. Forward request to CRM API
+    // 1. Forward request to the admin CRM (best-effort – never block submission)
     let crmData: { leadId?: string } = {};
     let crmResponseOk = false;
     let crmErrorText = '';
 
     try {
-      const response = await fetch('https://ott-therapist-crm.vercel.app/api/book', {
+      const response = await fetch(CRM_BOOK_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,13 +34,13 @@ export async function POST(request: Request) {
       console.error('Failed to forward booking to CRM API:', crmErr);
     }
 
-    const leadId = crmData.leadId || 'N/A';
+    const leadId = crmData.leadId || undefined;
 
     // 2. Prepare and send email notification
     const subject = `New Appointment Booking - ${payload.name} (${payload.therapyType})`;
     const bodyHtml = `
       <h2>New Appointment Intake Booking</h2>
-      <p><strong>Reference ID / Lead ID:</strong> ${leadId}</p>
+      ${leadId ? `<p><strong>Reference ID / Lead ID:</strong> ${leadId}</p>` : ''}
       <table style="border-collapse: collapse; width: 100%; max-width: 600px; font-family: sans-serif; font-size: 14px;">
         <tr style="background-color: #f9f9f9;">
           <td style="padding: 8px 12px; border: 1px solid #ddd; font-weight: bold; width: 200px;">Name</td>
@@ -79,11 +83,12 @@ export async function POST(request: Request) {
           <td style="padding: 8px 12px; border: 1px solid #ddd; white-space: pre-wrap;">${payload.additionalInfo || 'None'}</td>
         </tr>
       </table>
+      ${!crmResponseOk ? `<p style="color:#e53e3e; margin-top:1rem;"><strong>Note:</strong> CRM sync failed (${crmErrorText || 'unreachable'}). Manual entry may be required.</p>` : ''}
     `;
 
     const bodyText = `
 New Appointment Intake Booking
-Reference ID / Lead ID: ${leadId}
+${leadId ? `Reference ID / Lead ID: ${leadId}` : ''}
 Name: ${payload.name}
 Email: ${payload.email}
 Phone: ${payload.phone}
@@ -102,16 +107,18 @@ Additional Context / Info: ${payload.additionalInfo || 'None'}
       console.error('Failed to send booking notification email:', mailErr);
     }
 
-    if (!crmResponseOk) {
-      return NextResponse.json(
-        { error: crmErrorText || 'Failed to submit intake form to CRM, but email notification was sent.' }, 
-        { status: 500 }
-      );
-    }
-
-    return NextResponse.json(crmData);
+    // Always return success to the client – the email guarantees staff are notified
+    // even if the CRM was temporarily unavailable.
+    return NextResponse.json({
+      success: true,
+      ...(leadId ? { leadId } : {}),
+      crmSynced: crmResponseOk,
+    });
   } catch (error: any) {
     console.error('API Book Error:', error);
-    return NextResponse.json({ error: error.message || 'An error occurred processing the booking.' }, { status: 500 });
+    return NextResponse.json(
+      { error: error.message || 'An error occurred processing the booking.' },
+      { status: 500 }
+    );
   }
 }

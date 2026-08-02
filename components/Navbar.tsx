@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Menu, X, Sun, Moon, ChevronDown } from 'lucide-react';
+import { Menu, X, Sun, Moon, ChevronDown, UserCircle } from 'lucide-react';
 
 function NavbarContent() {
     const pathname = usePathname();
@@ -208,6 +208,20 @@ function NavbarContent() {
                         >
                             {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
                         </button>
+                    </li>
+
+                    {/* Patient Portal link */}
+                    <li>
+                        <Link
+                            href="/portal"
+                            id="nav-portal-link"
+                            className={`nav-link ${pathname === '/portal' ? 'active' : ''}`}
+                            onClick={() => setIsOpen(false)}
+                            style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}
+                        >
+                            <UserCircle size={16} />
+                            Patient Portal
+                        </Link>
                     </li>
                     
                     {/* Get Therapy CTA Hook */}

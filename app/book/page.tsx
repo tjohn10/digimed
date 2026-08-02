@@ -188,7 +188,7 @@ function BookForm() {
         throw new Error(data.error || 'Failed to submit the intake form. Please try again.');
       }
 
-      setLeadId(data.leadId);
+      setLeadId(data.leadId || null);
       setIsSubmitted(true);
       // Scroll to top to see success state
       window.scrollTo({ top: 0, behavior: 'smooth' });
