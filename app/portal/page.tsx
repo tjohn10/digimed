@@ -423,7 +423,7 @@ export default function PortalPage() {
         <span style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--primary)', textTransform: 'uppercase', letterSpacing: '1.5px', display: 'block', marginBottom: '0.75rem' }}>
           Secure Patient Access
         </span>
-        <h1 className="section-title" style={{ fontSize: '2.5rem', fontWeight: 800, fontFamily: 'var(--font-heading)' }}>
+        <h1 className="section-title portal-heading" style={{ fontWeight: 800, fontFamily: 'var(--font-heading)' }}>
           Patient Portal
         </h1>
         <p className="section-subtitle" style={{ fontSize: '1.05rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>
@@ -431,10 +431,10 @@ export default function PortalPage() {
         </p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'start' }}>
+      <div className="portal-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'start' }}>
 
         {/* ── Left: Auth Card ── */}
-        <div className="glass-panel" style={{ padding: '2.5rem', border: '1px solid var(--border)', background: 'var(--bg-card)' }}>
+        <div className="glass-panel portal-auth-card" style={{ padding: '2.5rem', border: '1px solid var(--border)', background: 'var(--bg-card)' }}>
 
           {/* Tab switcher */}
           <div style={{ display: 'flex', gap: '0', marginBottom: '2rem', background: 'var(--bg-panel)', borderRadius: '12px', padding: '4px', border: '1px solid var(--border)' }}>
@@ -556,9 +556,25 @@ export default function PortalPage() {
 
       {/* Responsive styles */}
       <style jsx global>{`
-        @media (max-width: 768px) {
+        .portal-heading {
+          font-size: 2.5rem;
+        }
+        @media (max-width: 900px) {
           .portal-grid {
             grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+          }
+        }
+        @media (max-width: 600px) {
+          .portal-heading {
+            font-size: 1.9rem !important;
+          }
+          .portal-auth-card {
+            padding: 1.5rem !important;
+            border-radius: 14px !important;
+          }
+          .portal-grid {
+            gap: 1.5rem !important;
           }
         }
       `}</style>
