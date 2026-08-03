@@ -264,7 +264,7 @@ function NavbarContent() {
             </div>
 
             {/* Responsive overrides */}
-            <style jsx global>{`
+            <style>{`
                 @media (max-width: 768px) {
                     .desktop-theme-toggle {
                         display: none !important;
