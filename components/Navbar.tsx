@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { Menu, X, Sun, Moon, ChevronDown, UserCircle, LogIn } from 'lucide-react';
@@ -293,9 +293,5 @@ function NavbarContent() {
 }
 
 export default function Navbar() {
-    return (
-        <Suspense fallback={<header><div className="nav-container"><div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}><div style={{ background: '#ffffff', padding: '4px 10px', borderRadius: '8px', display: 'flex', alignItems: 'center' }}><img src="/images/logo.jpg" alt="Ontime Therapy Logo" style={{ height: '36px', objectFit: 'contain' }} /></div><span style={{ fontSize: '1.2rem', fontWeight: 800 }}>OTT Ontime Therapy</span></div></div></header>}>
-            <NavbarContent />
-        </Suspense>
-    );
+    return <NavbarContent />;
 }
