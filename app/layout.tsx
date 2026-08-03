@@ -14,6 +14,30 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        {/* Auto-reload once on ChunkLoadError (stale deployment cache recovery) */}
+        <script dangerouslySetInnerHTML={{ __html: `
+          window.addEventListener('error', function(e) {
+            if (e.message && e.message.indexOf('ChunkLoadError') !== -1 || 
+                (e.message && e.message.indexOf('Loading chunk') !== -1)) {
+              var reloaded = sessionStorage.getItem('chunk_reload');
+              if (!reloaded) {
+                sessionStorage.setItem('chunk_reload', '1');
+                window.location.reload();
+              }
+            }
+          });
+          window.addEventListener('unhandledrejection', function(e) {
+            if (e.reason && e.reason.name === 'ChunkLoadError') {
+              var reloaded = sessionStorage.getItem('chunk_reload');
+              if (!reloaded) {
+                sessionStorage.setItem('chunk_reload', '1');
+                window.location.reload();
+              }
+            }
+          });
+        ` }} />
+      </head>
       <body>
         <Navbar />
         <main>
