@@ -1,8 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  output: 'standalone',
-  // Ensure old static chunks are not retained between deployments
+  // Unique build ID on every deploy so old cached chunks never conflict
   generateBuildId: async () => {
     return `build-${Date.now()}`;
   },
