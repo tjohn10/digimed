@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Activity, ShieldAlert, AlertCircle, BookOpen, Clipboard, Apple, FileText, UserCheck } from 'lucide-react';
+import { Activity, ShieldAlert, AlertCircle, BookOpen, Clipboard, Apple, FileText, UserCheck, Scale } from 'lucide-react';
 
 export default function AssessmentsHub() {
   return (
@@ -55,6 +55,17 @@ export default function AssessmentsHub() {
             Revised Children's Anxiety and Depression Scale. A 47-question clinical screening tool with youth and parent/carer versions.
           </p>
           <button className="btn btn-primary" style={{ marginTop: 'auto' }}>Start RCADS Screener</button>
+        </Link>
+
+        <Link href="/assessments/edeq" className="glass-panel selection-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <div className="icon">
+            <Scale size={32} color="var(--primary)" />
+          </div>
+          <h3>EDE-Q 6.0 Full Assessment</h3>
+          <p>
+            The official 28-item Eating Disorder Examination Questionnaire. Measures restraint, eating concern, shape concern, and weight concern over the past 28 days.
+          </p>
+          <button className="btn btn-primary" style={{ marginTop: 'auto' }}>Start EDE-Q 6.0 Assessment</button>
         </Link>
       </div>
 
