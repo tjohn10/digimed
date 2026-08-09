@@ -17,7 +17,7 @@ export default function ClientConsentForm() {
   const [clinicianDate, setClinicianDate] = useState(new Date().toISOString().split('T')[0]);
 
   return (
-    <section className="view-section active" style={{ maxWidth: '800px', margin: '2rem auto', padding: '0 1rem' }}>
+    <section className="view-section active" style={{ maxWidth: '1150px', margin: '2rem auto', padding: '0 1.5rem', width: '100%' }}>
       
       {/* Back link & Print Action */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }} className="no-print">

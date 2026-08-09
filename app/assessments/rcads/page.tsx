@@ -248,7 +248,7 @@ export default function RCADSQuestionnaire() {
   };
 
   return (
-    <section className="view-section active" style={{ maxWidth: '960px', margin: '2rem auto', padding: '0 1rem' }}>
+    <section className="view-section active" style={{ maxWidth: '1280px', margin: '2rem auto', padding: '0 1.5rem', width: '100%' }}>
       
       {/* Back button */}
       <div className="no-print" style={{ marginBottom: '2rem' }}>

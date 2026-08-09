@@ -201,7 +201,7 @@ export default function ServicesPage() {
   const [selectedService, setSelectedService] = useState<Service>(servicesData[0]);
 
   return (
-    <section className="view-section active" style={{ maxWidth: '1100px', margin: '2rem auto' }}>
+    <section className="view-section active" style={{ maxWidth: '1360px', margin: '2rem auto', width: '100%', padding: '0 1rem' }}>
       
       {/* Title */}
       <div className="section-title-wrap" style={{ textAlign: 'center', marginBottom: '4rem' }}>

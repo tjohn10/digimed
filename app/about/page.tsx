@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export default function AboutPage() {
   return (
-    <section className="view-section active" style={{ maxWidth: '1000px', margin: '2rem auto' }}>
+    <section className="view-section active" style={{ maxWidth: '1360px', margin: '2rem auto', width: '100%', padding: '0 1rem' }}>
       
       {/* Introduction Header */}
       <div className="section-title-wrap" style={{ textAlign: 'center', marginBottom: '4rem' }}>
@@ -81,7 +81,7 @@ export default function AboutPage() {
               <img src="/images/accph-member.jpg" alt="ACCPH Logo" style={{ height: '40px', objectFit: 'contain', background: '#fff', padding: '4px', borderRadius: '4px' }} />
               <div>
                 <span style={{ fontSize: '0.85rem', fontWeight: 600, display: 'block', color: 'var(--text-main)' }}>ACCPH Accredited Member</span>
-                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Independent Practitioner Registry</span>
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Adheres to ACCPH Ethical Framework &amp; Online Guidelines (<a href="https://www.accph.org.uk" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--primary)', textDecoration: 'none' }}>accph.org.uk</a>)</span>
               </div>
             </div>
 
@@ -144,9 +144,14 @@ export default function AboutPage() {
             <p style={{ color: 'var(--text-muted)', fontSize: '1rem', lineHeight: 1.7, marginBottom: '1rem' }}>
               Anotida’s approach blends clinical skill with humility, faith‑centred values, and a belief in every person’s capacity to grow. His practice is relational, respectful, and built on the understanding that healing is not linear — it is a journey walked with patience, courage, and the right support.
             </p>
-            <p style={{ color: 'var(--text-muted)', fontSize: '1rem', lineHeight: 1.7, marginBottom: 0 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: '1rem', lineHeight: 1.7, marginBottom: '1.25rem' }}>
               Ontime Therapy Services stands as a place where people can explore their experiences safely, reconnect with their strengths, and move toward a future defined not by what they have endured, but by what they are becoming.
             </p>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <Link href="/assessments/counselling-agreement" className="btn btn-secondary" style={{ padding: '0.65rem 1.25rem', fontSize: '0.9rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+                <Shield size={16} color="var(--primary)" /> View Online Counselling Agreement
+              </Link>
+            </div>
           </div>
 
           {/* Clinical Tracks */}

@@ -90,7 +90,23 @@ const faqData: FAQItem[] = [
   },
   {
     question: "How do I use the online CBT tools and assessments?",
-    answer: "Our self-assessments (PHQ-9 and GAD-7) and CBT Thought Records are completely free and run client-side. To prioritize clinical privacy, your worksheet entries are stored locally on your device (localStorage) and are never uploaded to any server. You can print or save them directly."
+    answer: "Our self-assessments (PHQ-9, GAD-7, and EDQ) and CBT Thought Records are completely free and run client-side. To prioritize clinical privacy, your worksheet entries are stored locally on your device (localStorage) and are never uploaded to any server. You can print or save them directly."
+  },
+  {
+    question: "What is your Online Counselling Agreement and Person-Centred philosophy?",
+    answer: (
+      <div>
+        <p style={{ marginBottom: '0.75rem' }}>
+          Our Online Counselling Agreement establishes a safe, confidential framework for therapy conducted via secure chat, Zoom video/audio, and encrypted email. Grounded in a Person-Centred approach (honesty, authenticity, non-judgement, acceptance, and client-led pace), our practice adheres to the ACCPH Ethical Framework for Good Practice and NMC professional standards.
+        </p>
+        <p style={{ margin: 0 }}>
+          You can read our full policy and complete the digital agreement on our{' '}
+          <Link href="/assessments/counselling-agreement" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>
+            Online Counselling Agreement & Self-Referral page
+          </Link>.
+        </p>
+      </div>
+    )
   },
   {
     question: "What locations do you serve in the UK?",
@@ -207,7 +223,7 @@ export default function FAQPage() {
   };
 
   return (
-    <section className="view-section active" style={{ maxWidth: '1000px', margin: '2rem auto' }}>
+    <section className="view-section active" style={{ maxWidth: '1360px', margin: '2rem auto', width: '100%', padding: '0 1rem' }}>
       
       {/* Page Title */}
       <div className="section-title-wrap" style={{ textAlign: 'center', marginBottom: '4.5rem' }}>

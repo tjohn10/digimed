@@ -133,6 +133,58 @@ const questionnaires: Record<string, Questionnaire> = {
                 recommendation: "We strongly recommend contacting a clinical mental health practitioner. Structured CBT sessions (online or in-person) can provide you with step-by-step tools to break the cycle of anxiety and avoidance."
             };
         }
+    },
+    edq: {
+        title: 'EDQ Eating Disorder Screener',
+        maxScore: 30,
+        questions: [
+            "Deliberately trying to limit the amount of food you eat to influence your shape or weight?",
+            "Going for long periods (8 waking hours or more) without eating to influence your weight or shape?",
+            "A strong desire to lose weight or an intense fear of gaining weight?",
+            "Thinking about food, eating, or calories making it difficult to concentrate on daily activities?",
+            "Thinking about your weight or body shape making it difficult to concentrate?",
+            "Feeling that your weight or body shape strongly determines how you judge yourself as a person?",
+            "Episodes where you ate an unusually large amount of food with a feeling of loss of control?",
+            "Making yourself sick (vomiting) or using laxatives to control your weight or shape?",
+            "Exercising driven by a compulsive urge to control weight, shape, or burn calories?",
+            "Feeling intense guilt, shame, or emotional distress after eating?"
+        ],
+        options: [
+            { text: "Not at all", score: 0 },
+            { text: "Several days", score: 1 },
+            { text: "More than half the days", score: 2 },
+            { text: "Nearly every day", score: 3 }
+        ],
+        interpret: function(score: number): Interpretation {
+            if (score <= 5) return {
+                severity: "Minimal Indication",
+                class: "score-minimal",
+                color: "#10b981",
+                explanation: "Your score indicates minimal to no clinically significant eating distress or body shape preoccupation.",
+                recommendation: "Maintain balanced, regular eating habits and positive self-care routines. If your relationship with food or body image changes, you can retake this assessment anytime."
+            };
+            if (score <= 12) return {
+                severity: "Mild Indicators",
+                class: "score-mild",
+                color: "#84cc16",
+                explanation: "Your score indicates mild dietary restraint, occasional body image dissatisfaction, or emerging food-related worries.",
+                recommendation: "Early intervention and psychoeducation can prevent eating distress from escalating. We recommend reviewing CBT-E guidance or scheduling an initial consultation with our eating disorder specialist."
+            };
+            if (score <= 20) return {
+                severity: "Moderate Indicators",
+                class: "score-moderate",
+                color: "#eab308",
+                explanation: "Your score indicates moderate eating disorder indicators. Rigid food rules, body shape over-evaluation, or compensatory habits are impacting your mental well-being.",
+                recommendation: "We strongly recommend booking a specialist consultation with our CBT-E practitioner. Enhanced Cognitive Behavioural Therapy is the leading clinical pathway for restoring regular eating and reducing shape distress."
+            };
+            return {
+                severity: "Significant Indicators",
+                class: "score-severe",
+                color: "#ef4444",
+                explanation: "Your score indicates significant clinical eating disorder indicators. Dietary restriction, binge-purge patterns, or severe body image distress require structured clinical care.",
+                recommendation: "Please schedule an assessment with our specialist eating disorder practitioner and your GP for comprehensive medical and psychological support."
+            };
+        }
     }
 };
 

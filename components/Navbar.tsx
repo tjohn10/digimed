@@ -195,6 +195,16 @@ function NavbarContent() {
                                     </Link>
                                 </li>
                                 <li>
+                                    <Link href="/assessments/counselling-agreement" className="nav-link dropdown-item" style={{ padding: '0.55rem 1.25rem', display: 'block', textDecoration: 'none', fontSize: '0.9rem', color: 'var(--primary)', fontWeight: 600 }} onClick={closeAll}>
+                                        Counselling Agreement
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/self-referral" className="nav-link dropdown-item" style={{ padding: '0.55rem 1.25rem', display: 'block', textDecoration: 'none', fontSize: '0.9rem', color: 'var(--primary)', fontWeight: 600 }} onClick={closeAll}>
+                                        Self-Referral Form
+                                    </Link>
+                                </li>
+                                <li>
                                     <Link href="/cbt-tools" className="nav-link dropdown-item" style={{ padding: '0.55rem 1.25rem', display: 'block', textDecoration: 'none', fontSize: '0.9rem' }} onClick={closeAll}>
                                         CBT Thought Record
                                     </Link>

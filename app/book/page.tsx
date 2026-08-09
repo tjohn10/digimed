@@ -200,7 +200,7 @@ function BookForm() {
   };
 
   return (
-    <section className="view-section active" style={{ maxWidth: '780px', margin: '2rem auto' }}>
+    <section className="view-section active" style={{ maxWidth: '1000px', margin: '2rem auto', width: '100%', padding: '0 1rem' }}>
       
       {/* Title */}
       <div className="section-title-wrap" style={{ textAlign: 'center', marginBottom: '3.5rem' }}>

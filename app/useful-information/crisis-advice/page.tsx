@@ -9,7 +9,7 @@ import {
 
 export default function CrisisAdvice() {
   return (
-    <section className="view-section active" style={{ maxWidth: '1000px', margin: '2rem auto', width: '100%' }}>
+    <section className="view-section active" style={{ maxWidth: '1360px', margin: '2rem auto', width: '100%', padding: '0 1rem' }}>
       
       {/* Critical Red Warning Banner */}
       <div className="glass-panel" style={{ padding: '2.5rem', borderLeft: '6px solid #ef4444', background: 'rgba(239, 68, 68, 0.04)', marginBottom: '3.5rem' }}>

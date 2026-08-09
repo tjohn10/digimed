@@ -75,7 +75,9 @@ export default function Footer() {
             <li><Link href="/about" className="footer-link" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem' }}>Meet Your Therapist</Link></li>
             <li><Link href="/services" className="footer-link" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem' }}>Our Services</Link></li>
             <li><Link href="/approach" className="footer-link" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem' }}>Our Approach</Link></li>
-            <li><Link href="/faq" className="footer-link" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem' }}>FAQ & Policies</Link></li>
+            <li><Link href="/faq" className="footer-link" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem' }}>FAQ &amp; Policies</Link></li>
+            <li><Link href="/assessments/counselling-agreement" className="footer-link" style={{ color: 'var(--primary)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600 }}>Counselling Agreement</Link></li>
+            <li><Link href="/self-referral" className="footer-link" style={{ color: 'var(--primary)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 600 }}>Self-Referral Form</Link></li>
             <li><Link href="/useful-information" className="footer-link" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem' }}>Useful Info Hub</Link></li>
             <li><Link href="/useful-information/self-guided" className="footer-link" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem' }}>Self Guided Support</Link></li>
             <li><Link href="/useful-information/parental-support" className="footer-link" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem' }}>Parental Support</Link></li>
@@ -122,9 +124,11 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="footer-bottom" style={{ maxWidth: '1280px', margin: '3.5rem auto 0', paddingTop: '2rem', borderTop: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+      <div className="footer-bottom" style={{ maxWidth: '1440px', margin: '3.5rem auto 0', paddingTop: '2rem', borderTop: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--text-muted)', fontSize: '0.85rem', flexWrap: 'wrap', gap: '1.25rem' }}>
         <div>© 2026 OTT Psychotherapy (Ontime Therapy) Ltd. All rights reserved.</div>
-        <div style={{ display: 'flex', gap: '1.5rem' }}>
+        <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+          <Link href="/assessments/counselling-agreement" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Online Counselling Agreement</Link>
+          <Link href="/self-referral" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Client Self-Referral</Link>
           <Link href="/faq" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Cancellation Policy</Link>
           <Link href="/faq" style={{ color: 'var(--text-muted)', textDecoration: 'none' }}>Safeguarding Policy</Link>
         </div>

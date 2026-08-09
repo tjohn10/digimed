@@ -13,7 +13,7 @@ export default function SelfGuidedSupport() {
   const [activeTab, setActiveTab] = useState<TabType>('conditions');
 
   return (
-    <section className="view-section active" style={{ maxWidth: '1100px', margin: '2rem auto', width: '100%' }}>
+    <section className="view-section active" style={{ maxWidth: '1360px', margin: '2rem auto', width: '100%', padding: '0 1rem' }}>
       {/* Page Title */}
       <div className="section-title-wrap" style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
         <span style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--primary)', textTransform: 'uppercase', letterSpacing: '1.5px', display: 'block', marginBottom: '0.75rem' }}>Self Guided Support</span>
