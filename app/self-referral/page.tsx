@@ -76,7 +76,7 @@ Date: ${signDate}
 Confirmed Online Counselling Agreement: ${agreementConfirmed ? 'YES' : 'NO'}`
     );
 
-    window.location.href = `mailto:admin@ontimetherapy.com?subject=${emailSubject}&body=${emailBody}`;
+    window.location.href = `mailto:contact@ontimetherapy.com?subject=${emailSubject}&body=${emailBody}`;
     setIsSubmitted(true);
   };
 
@@ -114,8 +114,8 @@ Confirmed Online Counselling Agreement: ${agreementConfirmed ? 'YES' : 'NO'}`
           </h1>
           <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', maxWidth: '720px', margin: '0 auto', lineHeight: 1.6 }}>
             Please complete and submit this confidential registration form. You may also email this directly to{' '}
-            <a href="mailto:admin@ontimetherapy.com" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>
-              admin@ontimetherapy.com
+            <a href="mailto:contact@ontimetherapy.com" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>
+              contact@ontimetherapy.com
             </a>. I aim to contact you within <strong>48 hours</strong> of receipt.
           </p>
         </div>
