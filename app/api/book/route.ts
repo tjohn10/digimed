@@ -102,9 +102,49 @@ Additional Context / Info: ${payload.additionalInfo || 'None'}
     `.trim();
 
     try {
-      await sendEmail(subject, bodyHtml, bodyText, payload.email);
+      // 1. Staff notification email
+      await sendEmail(subject, bodyHtml, bodyText, payload.email, 'contact@ontimetherapy.com');
     } catch (mailErr) {
-      console.error('Failed to send booking notification email:', mailErr);
+      console.error('Failed to send booking notification email to staff:', mailErr);
+    }
+
+    // 2. Client confirmation email
+    if (payload.email) {
+      const clientSubject = `Appointment Request Confirmation - Ontime Therapy`;
+      const clientHtml = `
+        <div style="font-family: sans-serif; max-width: 600px; color: #333; line-height: 1.6;">
+          <h2 style="color: #ff7824;">Appointment Request Received</h2>
+          <p>Dear ${payload.name},</p>
+          <p>Thank you for submitting your confidential intake appointment request.</p>
+          ${leadId ? `<p><strong>Intake Reference ID:</strong> ${leadId}</p>` : ''}
+          <div style="background-color: #f9f9f9; padding: 15px; border-radius: 8px; margin: 15px 0; border: 1px solid #eee;">
+            <p style="margin: 5px 0;"><strong>Therapy Required:</strong> ${payload.therapyType}</p>
+            <p style="margin: 5px 0;"><strong>Preferred Method:</strong> ${payload.method}</p>
+            <p style="margin: 5px 0;"><strong>Preferred Appointment:</strong> ${payload.preferredDate} at ${payload.preferredTime}</p>
+          </div>
+          <p>We aim to respond to every intake request within 24 hours. A clinical practitioner will contact you on <strong>${payload.phone}</strong> or via email to confirm details.</p>
+          <p>Warm regards,<br /><strong>Ontime Therapy Services</strong><br /><a href="https://ontimetherapy.com" style="color: #ff7824;">ontimetherapy.com</a></p>
+        </div>
+      `;
+      const clientText = `
+Dear ${payload.name},
+
+Thank you for submitting your confidential intake appointment request.
+${leadId ? `Intake Reference ID: ${leadId}` : ''}
+Therapy Required: ${payload.therapyType}
+Preferred Method: ${payload.method}
+Preferred Appointment: ${payload.preferredDate} at ${payload.preferredTime}
+
+We aim to respond within 24 hours. A practitioner will contact you at ${payload.phone} or via email.
+
+Ontime Therapy Services
+      `.trim();
+
+      try {
+        await sendEmail(clientSubject, clientHtml, clientText, 'contact@ontimetherapy.com', payload.email);
+      } catch (clientMailErr) {
+        console.error('Failed to send client booking confirmation email:', clientMailErr);
+      }
     }
 
     // Always return success to the client – the email guarantees staff are notified

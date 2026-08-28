@@ -29,55 +29,64 @@ export default function ClientSelfReferralPage() {
   const [agreementConfirmed, setAgreementConfirmed] = useState(false);
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [leadId, setLeadId] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName.trim() || !email.trim() || !phone.trim() || !gpConsent || !signature.trim()) {
       alert("Please fill in all required fields marked with an asterisk (*).");
       return;
     }
 
-    const emailSubject = encodeURIComponent(`Client Self-Referral: ${fullName}`);
-    const emailBody = encodeURIComponent(
-`CLIENT SELF-REFERRAL FORM
-Ontime Therapy Services
+    setIsSubmitting(true);
+    setSubmitError(null);
 
-Full Name: ${fullName}
-Date of Birth: ${dob}
-Address: ${address}
-Phone Number: ${phone}
-Emergency Contact Number: ${emergencyContact}
-Email Address: ${email}
-Best Time to Contact You: ${bestTimeToContact}
-Preferred Communication Method: ${preferredMethod}
+    try {
+      const payload = {
+        fullName: fullName.trim(),
+        dob,
+        address: address.trim(),
+        phone: phone.trim(),
+        emergencyContact: emergencyContact.trim(),
+        email: email.trim(),
+        bestTimeToContact: bestTimeToContact.trim(),
+        preferredMethod,
+        presentingIssue: presentingIssue.trim(),
+        previousCounselling: previousCounselling.trim(),
+        medicalHistory: medicalHistory.trim(),
+        upcomingAppointments: upcomingAppointments.trim(),
+        riskHistory: riskHistory.trim(),
+        gpDetails: gpDetails.trim(),
+        gpConsent,
+        signature: signature.trim(),
+        signDate,
+        agreementConfirmed
+      };
 
-What would you like to address in counselling?
-${presentingIssue}
+      const response = await fetch('/api/referral', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
 
-Previous counselling experience:
-${previousCounselling}
+      const data = await response.json();
 
-Medical or psychiatric history:
-${medicalHistory}
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit referral form. Please try again.');
+      }
 
-Upcoming medical appointments:
-${upcomingAppointments}
-
-History of self-harm, overdose, or violence:
-${riskHistory}
-
-GP details:
-${gpDetails}
-
-Consent to contact GP: ${gpConsent}
-
-Electronic Signature: ${signature}
-Date: ${signDate}
-Confirmed Online Counselling Agreement: ${agreementConfirmed ? 'YES' : 'NO'}`
-    );
-
-    window.location.href = `mailto:contact@ontimetherapy.com?subject=${emailSubject}&body=${emailBody}`;
-    setIsSubmitted(true);
+      setLeadId(data.leadId || null);
+      setIsSubmitted(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err: any) {
+      setSubmitError(err.message || 'An error occurred submitting your referral form. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -490,19 +499,39 @@ Confirmed Online Counselling Agreement: ${agreementConfirmed ? 'YES' : 'NO'}`
             </div>
           </div>
 
+          {submitError && (
+            <div style={{ padding: '1rem', background: 'rgba(239, 68, 68, 0.08)', border: '1px solid #ef4444', borderRadius: '12px', color: '#ef4444', textAlign: 'center', fontSize: '0.92rem', fontWeight: 600 }}>
+              ⚠ {submitError}
+            </div>
+          )}
+
           {/* Action Buttons */}
           <div style={{ display: 'flex', gap: '1.25rem', marginTop: '1rem', flexWrap: 'wrap' }} className="no-print">
             <button 
               type="submit" 
               className="btn btn-primary"
-              style={{ flex: 1.5, padding: '0.95rem 2rem', fontSize: '1.05rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', borderRadius: '12px' }}
+              disabled={isSubmitting}
+              style={{ flex: 1.5, padding: '0.95rem 2rem', fontSize: '1.05rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', borderRadius: '12px', opacity: isSubmitting ? 0.7 : 1, cursor: isSubmitting ? 'not-allowed' : 'pointer' }}
             >
-              <Send size={18} /> Submit Referral via Email (admin@ontimetherapy.com)
+              {isSubmitting ? (
+                <>
+                  <svg className="animate-spin" style={{ width: '20px', height: '20px' }} viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" style={{ opacity: 0.25 }} />
+                    <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" style={{ opacity: 0.75 }} />
+                  </svg>
+                  Submitting Referral...
+                </>
+              ) : (
+                <>
+                  <Send size={18} /> Submit Confidential Referral
+                </>
+              )}
             </button>
             <button 
               type="button" 
               className="btn btn-secondary"
               onClick={() => window.print()}
+              disabled={isSubmitting}
               style={{ flex: 1, padding: '0.95rem 1.75rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', borderRadius: '12px' }}
             >
               <Printer size={18} /> Print / Save Form (PDF)
@@ -510,8 +539,18 @@ Confirmed Online Counselling Agreement: ${agreementConfirmed ? 'YES' : 'NO'}`
           </div>
 
           {isSubmitted && (
-            <div style={{ padding: '1.25rem', background: 'rgba(16, 185, 129, 0.1)', border: '1px solid #10b981', borderRadius: '12px', color: '#10b981', textAlign: 'center', fontSize: '0.95rem', fontWeight: 600 }}>
-              ✓ Thank you! Your client referral details have been generated for dispatch to admin@ontimetherapy.com. Mr Anotida Macdonald aims to respond within 48 hours.
+            <div style={{ padding: '1.5rem', background: 'rgba(16, 185, 129, 0.1)', border: '2px solid #10b981', borderRadius: '14px', color: 'var(--text-main)', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
+              <div style={{ color: '#10b981', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.35rem', fontWeight: 800 }}>
+                <CheckCircle2 size={28} /> Self-Referral Submitted Successfully
+              </div>
+              {leadId && (
+                <div style={{ padding: '0.5rem 1rem', background: 'rgba(255, 255, 255, 0.05)', borderRadius: '8px', border: '1px solid var(--border)', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+                  Intake Reference ID: <strong style={{ color: 'var(--text-main)' }}>{leadId}</strong>
+                </div>
+              )}
+              <p style={{ margin: 0, fontSize: '0.98rem', color: 'var(--text-muted)', lineHeight: 1.6, maxWidth: '650px' }}>
+                Thank you, <strong>{fullName}</strong>. Your confidential referral has been securely dispatched to our clinical team and a confirmation email has been sent to <strong>{email}</strong>. Mr Anotida Macdonald aims to respond within <strong>48 hours</strong>.
+              </p>
             </div>
           )}
 
